@@ -1,0 +1,68 @@
+#Controls general gamemode settings. Individual settings have their own descriptions.
+settings:
+  #Controls the name of the world you wish to use as a lobby.
+  lobby: "lobby"
+  #Controls the coordinates of a universal spawn point of the lobby world.
+  #Coordinates are strings written like this: X:Y:Z:pitch:yaw, where : is the separator which should be included between values.
+  lobby-spawn: "205.5:66.1:-212.5:90.0f:0.0f"
+  #Controls the name of the world you wish to use as a Hunger Games arena.
+  arena: "alaskan"
+  #Controls arena spawn spots.
+  #Coordinates are presented in a form of a list, chosen first to last and assigned to players in join order.
+  #Coordinates are strings written like this: X:Y:Z:pitch:yaw, where : is the separator which should be included between values.
+  arena-spawns:
+    - "257.5:78.0:232.5:0.0f:0.0f"
+    - "265.5:78.0:233.5:20.0f:0.0f"
+    - "270.5:78.0:236.5:35.0f:0.0f"
+    - "274.5:78.0:239.5:45.0f:0.0f"
+    - "277.5:78.0:243.5:57.5f:0.0f"
+    - "280.5:78.0:248.5:72.5f:0.0f"
+    - "281.5:78.0:256.5:90.0f:0.0f"
+    - "280.5:78.0:264.5:110.0f:0.0f"
+    - "277.5:78.0:269.5:125.0f:0.0f"
+    - "274.5:78.0:273.5:135.0f:0.0f"
+    - "270.5:78.0:276.5:147.5f:0.0f"
+    - "265.5:78.0:279.5:162.5f:0.0f"
+    - "257.5:78.0:280.5:180.0f:0.0f"
+    - "249.5:78.0:279.5:-162.5f:0.0f"
+    - "244.5:78.0:276.5:-147.5f:0.0f"
+    - "240.5:78.0:273.5:-135.0f:0.0f"
+    - "237.5:78.0:269.5:-125.0f:0.0f"
+    - "234.5:78.0:264.5:-110.0f:0.0f"
+    - "233.5:78.0:256.5:-90.0f:0.0f"
+    - "234.5:78.0:248.5:-72.5f:0.0f"
+    - "237.5:78.0:243.5:-57.5f:0.0f"
+    - "240.5:78.0:239.5:-45.0f:0.0f"
+    - "244.5:78.0:236.5:-35.0f:0.0f"
+    - "249.5:78.0:233.5:-20.0f:0.0f"
+  #Controls the center of the arena (at the cornucopia). Used for setting a world border.
+  arena-center: "257.5:256.5"
+  #Controls the radius of the world border.
+  world-border-radius: 50
+messages:
+  prefix: "&e&lHungerGames &8| &r"
+  no-permission: "&cYou do not have permission to perform this command."
+  game-started: "&fGame has successfully started!"
+  lobby-timer-notifications: "&fVoting concludes in {timer} {m}!"
+  launch-cancelled: "&fNot enough players for the game to start! Timer aborted."
+  global-timer-notifications: "&fThe game will commence in {timer} {m}!"
+  global-game-started: "&fGame is now commencing!"
+  grace-period: "&fGrace period will end in {timer} {m}!"
+  grace-period-ended: "&fGrace period has ended!"
+  global-kill: "&fA cannon can be heard in the distance. Only {players} players remain!"
+  kill: "&fYou have eliminated &e{player}&f!"
+  killed: "&fYou were eliminated by &e{player}&f!"
+  killed-natural: "&fYou were eliminated!"
+  deathmatch-timer-notifications: "&fDeathmatch will begin in {timer} {m}!"
+  deathmatch-started: "&fDeathmatch is now commencing!"
+  deathmatch-prepare: "&fYou have {timer} {m} to prepare for the deathmatch!"
+  victory: "&eYou are the winner of the Hunger Games!"
+  victory-title: "&6&lVICTORY!"
+  victory-global: "&e{player} &fhas won the Hunger Games!"
+  endgame: "&fThe server will restart in {timer} {m}."
+  refill: "&fAll chests will be refilled in {timer} {m}!"
+  refill-commencing: "&fAll chests have been refilled!"
+  summary:
+    - ""
+    - "big"
+    - ""

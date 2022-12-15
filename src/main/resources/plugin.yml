@@ -1,0 +1,7 @@
+name: HungerGames
+main: ru.dgrew.hg.Main
+version: 1.0-SNAPSHOT
+api-version: 1.18
+commands:
+  start:
+    description: "/start - Starts a Hunger Games session for all online players."
