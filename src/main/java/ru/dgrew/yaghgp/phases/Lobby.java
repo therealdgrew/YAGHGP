@@ -1,7 +1,6 @@
-package ru.dgrew.hg.phases;
+package ru.dgrew.yaghgp.phases;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,9 +11,9 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import ru.dgrew.hg.Main;
-import ru.dgrew.hg.Phase;
-import ru.dgrew.hg.managers.SettingsManager;
+import ru.dgrew.yaghgp.Main;
+import ru.dgrew.yaghgp.Phase;
+import ru.dgrew.yaghgp.managers.SettingsManager;
 
 public class Lobby extends Phase {
     private SettingsManager sm;
@@ -33,10 +32,7 @@ public class Lobby extends Phase {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        e.joinMessage(Component.text(p.getName())
-                        .color(NamedTextColor.GOLD)
-                        .append(Component.text(" has joined!"))
-                            .color(NamedTextColor.YELLOW));
+        e.setJoinMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has joined!");
         p.setGameMode(GameMode.ADVENTURE);
         p.setExp(0);
         p.setLevel(0);
@@ -51,10 +47,7 @@ public class Lobby extends Phase {
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
-        e.quitMessage(Component.text(e.getPlayer().getName())
-                .color(NamedTextColor.GOLD)
-                .append(Component.text(" has left."))
-                .color(NamedTextColor.YELLOW));
+        e.setQuitMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has left!");
     }
     @EventHandler
     public void onWorldDamage(EntityDamageEvent e) {

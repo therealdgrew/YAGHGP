@@ -1,10 +1,10 @@
-package ru.dgrew.hg.commands;
+package ru.dgrew.yaghgp.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import ru.dgrew.hg.Main;
-import ru.dgrew.hg.managers.ChatManager;
+import ru.dgrew.yaghgp.Main;
+import ru.dgrew.yaghgp.managers.ChatManager;
 
 public class Start implements CommandExecutor {
     ChatManager cm;

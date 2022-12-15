@@ -1,4 +1,4 @@
-package ru.dgrew.hg.managers;
+package ru.dgrew.yaghgp.managers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -1,14 +1,14 @@
-package ru.dgrew.hg;
+package ru.dgrew.yaghgp;
 
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.dgrew.hg.commands.Start;
-import ru.dgrew.hg.managers.ChatManager;
-import ru.dgrew.hg.managers.PhaseManager;
-import ru.dgrew.hg.managers.PlayerManager;
-import ru.dgrew.hg.managers.SettingsManager;
+import ru.dgrew.yaghgp.commands.Start;
+import ru.dgrew.yaghgp.managers.ChatManager;
+import ru.dgrew.yaghgp.managers.PhaseManager;
+import ru.dgrew.yaghgp.managers.PlayerManager;
+import ru.dgrew.yaghgp.managers.SettingsManager;
 
 public class Main extends JavaPlugin implements Listener {
     private static Main instance;
@@ -32,11 +32,13 @@ public class Main extends JavaPlugin implements Listener {
         lobby.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         lobby.setGameRule(GameRule.DO_FIRE_TICK, false);
         lobby.setGameRule(GameRule.DO_TILE_DROPS, false);
+        lobby.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
         arena.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         arena.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         arena.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         arena.setGameRule(GameRule.DO_FIRE_TICK, false);
         arena.setGameRule(GameRule.DO_TILE_DROPS, false);
+        arena.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
         lobby.setTime(5000L);
         arena.setTime(5000L);
         arena.setDifficulty(Difficulty.HARD);

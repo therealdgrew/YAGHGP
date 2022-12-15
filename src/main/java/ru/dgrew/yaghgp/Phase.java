@@ -1,4 +1,4 @@
-package ru.dgrew.hg;
+package ru.dgrew.yaghgp;
 
 import org.bukkit.event.Listener;
 

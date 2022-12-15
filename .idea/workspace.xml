@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="HungerGames" />
+      <artifact name="YAGHGP" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,28 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/HungerGames.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/Phase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/commands/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/ChatManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/LootManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/PhaseManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/PlayerManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/SettingsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/Deathmatch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/EndGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/InGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/Lobby.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/PreGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/YAGHGP.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/YAGHGP/YAGHGP.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/HungerGames.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/Phase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Phase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/commands/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/commands/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/ChatManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/ChatManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/LootManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/LootManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/PhaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/PhaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/PlayerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/managers/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/SettingsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/EndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/EndGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/hg/phases/PreGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +53,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2IfqorD5Qh1AVW7FMVOGSPkw6jj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -67,9 +76,10 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/IdeaProjects/YAGHGP&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

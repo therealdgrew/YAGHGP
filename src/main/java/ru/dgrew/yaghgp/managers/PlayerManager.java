@@ -1,4 +1,4 @@
-package ru.dgrew.hg.managers;
+package ru.dgrew.yaghgp.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

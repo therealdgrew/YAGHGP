@@ -1,10 +1,10 @@
-package ru.dgrew.hg.managers;
+package ru.dgrew.yaghgp.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
-import ru.dgrew.hg.Main;
-import ru.dgrew.hg.Phase;
-import ru.dgrew.hg.phases.Lobby;
+import ru.dgrew.yaghgp.Main;
+import ru.dgrew.yaghgp.Phase;
+import ru.dgrew.yaghgp.phases.Lobby;
 
 public class PhaseManager {
     private Phase currentPhase;

@@ -1,11 +1,6 @@
-package ru.dgrew.hg.phases;
+package ru.dgrew.yaghgp.phases;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -21,14 +16,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import ru.dgrew.hg.Main;
-import ru.dgrew.hg.Phase;
-import ru.dgrew.hg.managers.ChatManager;
-import ru.dgrew.hg.managers.PlayerManager;
-import ru.dgrew.hg.managers.SettingsManager;
+import ru.dgrew.yaghgp.Main;
+import ru.dgrew.yaghgp.Phase;
+import ru.dgrew.yaghgp.managers.ChatManager;
+import ru.dgrew.yaghgp.managers.PlayerManager;
+import ru.dgrew.yaghgp.managers.SettingsManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Deathmatch extends Phase {
     private int timer;
@@ -82,15 +78,12 @@ public class Deathmatch extends Phase {
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        e.joinMessage(null);
-        e.getPlayer().kick(Component.text("Game already started!"));
+        e.setJoinMessage(null);
+        e.getPlayer().kickPlayer("Game already started!");
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
-        e.quitMessage(Component.text(e.getPlayer().getName())
-                .color(NamedTextColor.GOLD)
-                .append(Component.text(" has left."))
-                .color(NamedTextColor.YELLOW));
+        e.setQuitMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has left!");
         Main.getPlm().removeOnDC(e.getPlayer());
         checkForPlayerCount();
     }
@@ -104,7 +97,6 @@ public class Deathmatch extends Phase {
             killed.sendMessage(cm.getPrefix() + cm.getKilled().replace("{player}",killer.getName()));
         }
         else killed.sendMessage(cm.getPrefix() + cm.getKillednat());
-        e.setCancelled(true);
         killed.setHealth(20);
         killed.getWorld().strikeLightningEffect(killed.getLocation());
         List<ItemStack> items = new ArrayList<>();
@@ -113,7 +105,7 @@ public class Deathmatch extends Phase {
         for(ItemStack item : items) if (item != null) killed.getWorld().dropItem(killed.getLocation(), item).setPickupDelay(20);
         items.clear();
         pm.transferToSpectators(killed);
-        Bukkit.broadcast(Component.text(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size()))));
+        e.setDeathMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
         checkForPlayerCount();
     }
     @EventHandler
@@ -131,15 +123,15 @@ public class Deathmatch extends Phase {
             @Override
             public void run() {
                 if (timer > 0) {
-                    if (timer == 10) Bukkit.broadcast(Component.text(cm.getPrefix()).append(Component.text(cm.getDeathmatchprep(timer))));
+                    if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + (cm.getDeathmatchprep(timer)));
                     if (timer <= 5) {
                         for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                        Bukkit.broadcast(Component.text(cm.getPrefix()).append(Component.text(cm.getDeathmatchprep(timer))));
+                        Bukkit.broadcastMessage(cm.getPrefix() + cm.getDeathmatchprep(timer));
                     }
                     timer--;
                 } else {
                     for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
-                    Bukkit.broadcast(Component.text(cm.getPrefix()).append(Component.text(cm.getDeathmatchstart())));
+                    Bukkit.broadcastMessage(cm.getPrefix() + cm.getDeathmatchstart());
                     prepbool = false;
                     cancel();
                 }
@@ -147,9 +139,15 @@ public class Deathmatch extends Phase {
         }.runTaskTimer(Main.getInstance(),20L, 20L);
     }
     void scatterPlayers() {
-        System.out.println("Scattering tributes...");
-        Player[] players = pm.getRemainingPlayersList().toArray(new Player[0]);
-        for(int i = 0; i<players.length; i++) players[i].teleport(sm.fetchCorrectedCoordinates().get(i));
+        Bukkit.getLogger().info("Scattering players...");
+        Random random = new Random();
+        List<Location> list = sm.fetchCorrectedCoordinates();
+        int var;
+        for (Player player : pm.getRemainingPlayersList()) {
+            var = random.nextInt(list.size());
+            player.teleport(list.get(var));
+            list.remove(var);
+        }
         System.out.println("All tributes should now be scattered!");
     }
     void checkForPlayerCount() {
