@@ -5,13 +5,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockIgniteEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -27,6 +25,7 @@ public class EndGame extends Phase {
     private SettingsManager sm;
     private ChatManager cm;
     private Player victor;
+    //region Phase Methods
     @Override
     public void onEnable() {
         timer = 15;
@@ -44,17 +43,37 @@ public class EndGame extends Phase {
         Bukkit.getServer().unloadWorld(sm.getArenaobj(), true);
         Bukkit.getServer().reload();
     }
+    @Override
+    public Phase next() {
+        return null;
+    }
+    //endregion
+    //region Phase Listeners
+    //region Phase-specific Listeners
+    @EventHandler
+    public void onWorldDamage(EntityDamageEvent e) {
+        e.setCancelled(true);
+    }
+    //endregion
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if (!e.getBlock().getType().name().endsWith("_LEAVES") || !(e.getBlock().getType().name().endsWith("FIRE"))) e.setCancelled(true);
+        if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
+        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
         if (!e.getCause().equals(BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL)) e.setCancelled(true);
+    }
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
+            if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
+                    e.getClickedBlock().getType() == Material.FLOWER_POT ||
+                    e.getClickedBlock().getType().name().endsWith("_LOG"))
+                e.setCancelled(true);
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -73,13 +92,11 @@ public class EndGame extends Phase {
         e.setCancelled(true);
     }
     @EventHandler
-    public void onWorldDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
     public void onLeafDecay(LeavesDecayEvent e){
         e.setCancelled(true);
     }
+    //endregion
+    //region Runnables
     void startTimer() {
         new BukkitRunnable() {
             @Override
@@ -99,14 +116,10 @@ public class EndGame extends Phase {
                 } else {
                     for(Player p : Bukkit.getOnlinePlayers()) p.kickPlayer("Game ended! Restarting server...");
                     Bukkit.getServer().unloadWorld(sm.getArenaobj(), false);
-                    Bukkit.getLogger().info("The arena world should now be unloaded!");
                     Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> Bukkit.getServer().shutdown(), 60);
                 }
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
     }
-    @Override
-    public Phase next() {
-        return null;
-    }
+    //endregion
 }

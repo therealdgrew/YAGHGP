@@ -23,15 +23,13 @@ import ru.dgrew.yaghgp.managers.ChatManager;
 import ru.dgrew.yaghgp.managers.LootManager;
 import ru.dgrew.yaghgp.managers.PlayerManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class InGame extends Phase {
     private int timer;
     private ChatManager cm;
     private LootManager lm;
     private PlayerManager pm;
     private BukkitTask gameTimer;
+    //region Phase Methods
     @Override
     public void onEnable() {
         timer = 900;
@@ -47,23 +45,32 @@ public class InGame extends Phase {
     @Override
     public void onDisable() {
         gameTimer.cancel();
-        Bukkit.getLogger().info("Game timer successfully disabled, handing over to Deathmatch...");
     }
     @Override
     public Phase next() {
         return new Deathmatch();
     }
+    //endregion
+    //region Phase Listeners
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
+        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
         if (!e.getCause().equals(BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL)) e.setCancelled(true);
+    }
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
+            if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
+                    e.getClickedBlock().getType() == Material.FLOWER_POT ||
+                    e.getClickedBlock().getType().name().endsWith("_LOG"))
+                e.setCancelled(true);
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -74,29 +81,7 @@ public class InGame extends Phase {
     public void onLeave(PlayerQuitEvent e){
         e.setQuitMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has left!");
         Main.getPlm().removeOnDC(e.getPlayer());
-        Bukkit.getLogger().info("A player has DC'd! Removing from tributes list, current list size = " + pm.getRemainingPlayersList().size());
         checkForPlayerCount();
-    }
-    @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onLeafDecay(LeavesDecayEvent e){
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (e.getClickedBlock() != null)
-        {
-            if (e.getAction() == Action.PHYSICAL)
-                if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
-                        e.getClickedBlock().getType() == Material.FLOWER_POT ||
-                        e.getClickedBlock().getType().name().endsWith("_LOG"))
-                    e.setCancelled(true);
-        }
     }
     @EventHandler
     public void onChestOpen(InventoryOpenEvent e) {
@@ -139,7 +124,6 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onKill(PlayerDeathEvent e){
-        e.setDeathMessage(null);
         e.getEntity();
         Player killed = e.getEntity();
         if (e.getEntity().getKiller() instanceof Player) {
@@ -150,15 +134,22 @@ public class InGame extends Phase {
         else killed.sendMessage(cm.getPrefix() + cm.getKillednat());
         killed.setHealth(20);
         killed.getWorld().strikeLightningEffect(killed.getLocation());
-        List<ItemStack> items = new ArrayList<>();
-        for(int i = 0; i < killed.getInventory().getSize(); i++) items.add(killed.getInventory().getItem(i));
-        killed.getInventory().clear();
-        for(ItemStack item : items) if (item != null) killed.getWorld().dropItem(killed.getLocation(), item).setPickupDelay(20);
-        items.clear();
         pm.transferToSpectators(killed);
         e.setDeathMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
         checkForPlayerCount();
     }
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent e) {
+        e.setCancelled(true);
+    }
+    @EventHandler
+    public void onLeafDecay(LeavesDecayEvent e){
+        e.setCancelled(true);
+    }
+    //endregion
+    //region Runnables
     void startTimer() {
         gameTimer = new BukkitRunnable() {
             @Override
@@ -186,6 +177,7 @@ public class InGame extends Phase {
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
     }
+    //endregion
     void checkForPlayerCount() {
         if (pm.getRemainingPlayersList().size() == 1) {
             timer = 0;

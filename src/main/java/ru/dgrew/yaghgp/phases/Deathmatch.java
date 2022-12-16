@@ -3,14 +3,12 @@ package ru.dgrew.yaghgp.phases;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockIgniteEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -21,8 +19,6 @@ import ru.dgrew.yaghgp.Phase;
 import ru.dgrew.yaghgp.managers.ChatManager;
 import ru.dgrew.yaghgp.managers.PlayerManager;
 import ru.dgrew.yaghgp.managers.SettingsManager;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +29,7 @@ public class Deathmatch extends Phase {
     private SettingsManager sm;
     private boolean prepbool;
     private BukkitTask gracep;
+    //region Phase Methods
     @Override
     public void onEnable() {
         prepbool = true;
@@ -49,32 +46,35 @@ public class Deathmatch extends Phase {
         checkForPlayerCount();
         Bukkit.getLogger().info("Deathmatch phase has started successfully!");
     }
-
     @Override
     public void onDisable() {
         gracep.cancel();
-        Bukkit.getLogger().info("Grace Period timer successfully disabled, handing over to EndGame...");
     }
-
     @Override
     public Phase next() {
         return new EndGame();
     }
+    //endregion
+    //region Phase Listeners
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if (!e.getBlock().getType().name().endsWith("_LEAVES") || !(e.getBlock().getType().name().endsWith("FIRE"))) e.setCancelled(true);
+        if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
+        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
         if (!e.getCause().equals(BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
-    public void onWorldDamage(EntityDamageEvent e) {
-        if (prepbool) e.setCancelled(true);
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
+            if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
+                    e.getClickedBlock().getType() == Material.FLOWER_POT ||
+                    e.getClickedBlock().getType().name().endsWith("_LOG"))
+                e.setCancelled(true);
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -99,11 +99,6 @@ public class Deathmatch extends Phase {
         else killed.sendMessage(cm.getPrefix() + cm.getKillednat());
         killed.setHealth(20);
         killed.getWorld().strikeLightningEffect(killed.getLocation());
-        List<ItemStack> items = new ArrayList<>();
-        for(int i = 0; i < killed.getInventory().getSize(); i++) items.add(killed.getInventory().getItem(i));
-        killed.getInventory().clear();
-        for(ItemStack item : items) if (item != null) killed.getWorld().dropItem(killed.getLocation(), item).setPickupDelay(20);
-        items.clear();
         pm.transferToSpectators(killed);
         e.setDeathMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
         checkForPlayerCount();
@@ -118,6 +113,8 @@ public class Deathmatch extends Phase {
     public void onLeafDecay(LeavesDecayEvent e){
         e.setCancelled(true);
     }
+    //endregion
+    //region Runnables
     void startTimer() {
         gracep = new BukkitRunnable() {
             @Override
@@ -138,6 +135,7 @@ public class Deathmatch extends Phase {
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
     }
+    //endregion
     void scatterPlayers() {
         Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();

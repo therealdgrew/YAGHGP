@@ -17,6 +17,7 @@ import ru.dgrew.yaghgp.managers.SettingsManager;
 
 public class Lobby extends Phase {
     private SettingsManager sm;
+    //region Phase Methods
     @Override
     public void onEnable() {
         sm = new SettingsManager(Main.getInstance().getConfig());
@@ -29,6 +30,8 @@ public class Lobby extends Phase {
     public Phase next() {
         return new PreGame();
     }
+    //endregion
+    //region Phase Listeners
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -65,4 +68,5 @@ public class Lobby extends Phase {
     public void onLeafDecay(LeavesDecayEvent e){
         e.setCancelled(true);
     }
+    //endregion
 }

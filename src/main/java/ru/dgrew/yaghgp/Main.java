@@ -39,8 +39,8 @@ public class Main extends JavaPlugin implements Listener {
         arena.setGameRule(GameRule.DO_FIRE_TICK, false);
         arena.setGameRule(GameRule.DO_TILE_DROPS, false);
         arena.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
-        lobby.setTime(5000L);
-        arena.setTime(5000L);
+        lobby.setTime(5000);
+        arena.setTime(5000);
         arena.setDifficulty(Difficulty.HARD);
         arena.getWorldBorder().setSize(10000);
         for(Entity e : lobby.getEntities()) e.remove();

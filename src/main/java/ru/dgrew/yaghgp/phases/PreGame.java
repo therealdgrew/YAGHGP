@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -27,6 +28,7 @@ public class PreGame extends Phase {
     private ChatManager cm;
     private SettingsManager sm;
     private BukkitTask countdown;
+    //region Phase Methods
     @Override
     public void onEnable() {
         sm = Main.getSm();
@@ -39,14 +41,14 @@ public class PreGame extends Phase {
     }
     @Override
     public void onDisable() {
-        Bukkit.getLogger().info("Disabling countdown...");
         countdown.cancel();
-        Bukkit.getLogger().info("Countdown successfully disabled, handing over to InGame...");
     }
     @Override
     public Phase next() {
         return new InGame();
     }
+    //endregion
+    //region Phase Listeners
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         e.setJoinMessage(null);
@@ -60,14 +62,6 @@ public class PreGame extends Phase {
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
     @EventHandler
-    public void onWorldDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e){
-        e.setCancelled(true);
-    }
-    @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         e.setCancelled(true);
     }
@@ -75,6 +69,20 @@ public class PreGame extends Phase {
     public void onLeafDecay(LeavesDecayEvent e){
         e.setCancelled(true);
     }
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e) {
+        e.setCancelled(true);
+    }
+    @EventHandler
+    public void onWorldDamage(EntityDamageEvent e) {
+        e.setCancelled(true);
+    }
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e){
+        e.setCancelled(true);
+    }
+    //endregion
+    //region Runnables
     void startCountdown() {
         countdown = new BukkitRunnable() {
             @Override
@@ -96,6 +104,7 @@ public class PreGame extends Phase {
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
     }
+    //endregion
     void scatterPlayers() {
         Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();
