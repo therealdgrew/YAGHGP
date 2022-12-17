@@ -39,7 +39,7 @@ public class InGame extends Phase {
         pm.updatePlayersList();
         for (Player p : pm.getRemainingPlayersList()) p.setGameMode(GameMode.SURVIVAL);
         startTimer();
-        Bukkit.getLogger().info("InGame phase has started successfully!");
+        System.out.println("InGame phase has started successfully!");
     }
 
     @Override
@@ -54,11 +54,11 @@ public class InGame extends Phase {
     //region Phase Listeners
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
+        if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS")) && !(e.getBlock().getType().name().endsWith("FERN"))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
+        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {

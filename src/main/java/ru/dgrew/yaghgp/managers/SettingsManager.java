@@ -38,20 +38,20 @@ public class SettingsManager {
     private List<String> coordinates;
     final private List<Location> correctedCoordinates = new ArrayList<>();
     public List<Location> fetchCorrectedCoordinates() {
-        Bukkit.getLogger().info("Coordinates fetched! Outputting...");
-        String[] coords;
-        for (String s : coordinates) {
-            Bukkit.getLogger().info(s);
-            coords = s.split(":");
-            correctedCoordinates.add(new Location(getArenaobj(),
-                    Double.parseDouble(coords[0]),
-                    Double.parseDouble(coords[1]),
-                    Double.parseDouble(coords[2]),
-                    Float.parseFloat(coords[3]),
-                    Float.parseFloat(coords[4])));
+        if (correctedCoordinates.size()==0) {
+            String[] coords;
+            for (String s : coordinates) {
+                coords = s.split(":");
+                correctedCoordinates.add(new Location(getArenaobj(),
+                        Double.parseDouble(coords[0]),
+                        Double.parseDouble(coords[1]),
+                        Double.parseDouble(coords[2]),
+                        Float.parseFloat(coords[3]),
+                        Float.parseFloat(coords[4])));
+            }
+            return correctedCoordinates;
         }
-        Bukkit.getLogger().warning("That should be all the coordinates supplied by the config. Note that these coordinates will not match coordinates per player!");
-        return correctedCoordinates;
+        else return correctedCoordinates;
     }
     private String arenaCenter;
     public Location fetchArenaCenter() {

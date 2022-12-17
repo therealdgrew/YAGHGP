@@ -36,7 +36,7 @@ public class EndGame extends Phase {
         victor.playSound(victor.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1, 1);
         Bukkit.broadcastMessage(cm.getPrefix() + cm.getGlobalvictory().replace("{player}", victor.getName()));
         startTimer();
-        Bukkit.getLogger().info("EndGame phase has started successfully!");
+        System.out.println("EndGame phase has started successfully!");
     }
     @Override
     public void onDisable() {
@@ -49,19 +49,13 @@ public class EndGame extends Phase {
     }
     //endregion
     //region Phase Listeners
-    //region Phase-specific Listeners
-    @EventHandler
-    public void onWorldDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
-    }
-    //endregion
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
+        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
@@ -93,6 +87,10 @@ public class EndGame extends Phase {
     }
     @EventHandler
     public void onLeafDecay(LeavesDecayEvent e){
+        e.setCancelled(true);
+    }
+    @EventHandler
+    public void onWorldDamage(EntityDamageEvent e) {
         e.setCancelled(true);
     }
     //endregion

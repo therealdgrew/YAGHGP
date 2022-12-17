@@ -44,7 +44,7 @@ public class Deathmatch extends Phase {
         scatterPlayers();
         startTimer();
         checkForPlayerCount();
-        Bukkit.getLogger().info("Deathmatch phase has started successfully!");
+        System.out.println("Deathmatch phase has started successfully!");
     }
     @Override
     public void onDisable() {
@@ -62,7 +62,7 @@ public class Deathmatch extends Phase {
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
+        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
@@ -137,7 +137,7 @@ public class Deathmatch extends Phase {
     }
     //endregion
     void scatterPlayers() {
-        Bukkit.getLogger().info("Scattering players...");
+        System.out.println("Scattering players...");
         Random random = new Random();
         List<Location> list = sm.fetchCorrectedCoordinates();
         int var;
