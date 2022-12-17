@@ -58,7 +58,7 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
+        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
@@ -69,7 +69,8 @@ public class InGame extends Phase {
         if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
             if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
                     e.getClickedBlock().getType() == Material.FLOWER_POT ||
-                    e.getClickedBlock().getType().name().endsWith("_LOG"))
+                    e.getClickedBlock().getType().name().endsWith("_LOG") ||
+                    e.getClickedBlock().getType().name().endsWith("_WOOD"))
                 e.setCancelled(true);
     }
     @EventHandler
@@ -85,14 +86,16 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onChestOpen(InventoryOpenEvent e) {
-        if(e.getInventory().getHolder() instanceof Chest c){
+        if(e.getInventory().getHolder() instanceof Chest){
+            Chest c = (Chest)e.getInventory().getHolder();
             if (lm.getChestContents(c.getLocation()) == null) {
                 c.getInventory().clear();
                 lm.createRandomChest(c.getInventory());
                 lm.storeChestContents(c.getLocation(), c.getInventory());
             }
         }
-        if(e.getInventory().getHolder() instanceof DoubleChest c){
+        if(e.getInventory().getHolder() instanceof DoubleChest){
+            DoubleChest c = (DoubleChest)e.getInventory().getHolder();
             Chest left = (Chest)c.getLeftSide();
             Chest right = (Chest)c.getRightSide();
             if (lm.getChestContents(c.getLocation()) == null &&
@@ -111,10 +114,12 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onChestClose(InventoryCloseEvent e){
-        if(e.getInventory().getHolder() instanceof Chest c){
+        if(e.getInventory().getHolder() instanceof Chest){
+            Chest c = (Chest)e.getInventory().getHolder();
             lm.storeChestContents(c.getLocation(), c.getInventory());
         }
-        if(e.getInventory().getHolder() instanceof DoubleChest c){
+        if(e.getInventory().getHolder() instanceof DoubleChest){
+            DoubleChest c = (DoubleChest)e.getInventory().getHolder();
             Chest left = (Chest)c.getLeftSide();
             Chest right = (Chest)c.getRightSide();
             lm.storeChestContents(c.getLocation(), c.getInventory());

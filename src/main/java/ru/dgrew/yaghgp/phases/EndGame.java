@@ -55,7 +55,7 @@ public class EndGame extends Phase {
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand().equals(new ItemStack(Material.FLINT_AND_STEEL))) e.setCancelled(true);
+        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
@@ -66,7 +66,8 @@ public class EndGame extends Phase {
         if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
             if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
                     e.getClickedBlock().getType() == Material.FLOWER_POT ||
-                    e.getClickedBlock().getType().name().endsWith("_LOG"))
+                    e.getClickedBlock().getType().name().endsWith("_LOG") ||
+                    e.getClickedBlock().getType().name().endsWith("_WOOD"))
                 e.setCancelled(true);
     }
     @EventHandler
