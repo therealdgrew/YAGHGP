@@ -36,6 +36,7 @@ public class Lobby extends Phase {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         e.setJoinMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has joined!");
+        p.teleport(sm.fetchLobbySpawn());
         p.setGameMode(GameMode.ADVENTURE);
         p.setExp(0);
         p.setLevel(0);
@@ -46,7 +47,6 @@ public class Lobby extends Phase {
         p.getInventory().clear();
         p.getInventory().setArmorContents(new ItemStack[]{null, null, null, null});
         p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
-        p.teleport(sm.fetchLobbySpawn());
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
