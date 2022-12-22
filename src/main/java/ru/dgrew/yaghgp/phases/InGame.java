@@ -3,20 +3,16 @@ package ru.dgrew.yaghgp.phases;
 import org.bukkit.*;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -135,19 +131,23 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onDeath(EntityDamageByEntityEvent e) {
-        Player killed = (Player)e.getEntity();
-        if (killed.getHealth() <= e.getFinalDamage()) {
-            e.setCancelled(true);
-            onDeath(killed, e.getDamager());
+        if (e.getEntity() instanceof Player) {
+            Player killed = (Player)e.getEntity();
+            if (killed.getHealth() <= e.getFinalDamage()) {
+                e.setCancelled(true);
+                onDeath(killed, e.getDamager());
+            }
         }
     }
     @EventHandler
     public void onWorldDeath(EntityDamageEvent e) {
-        Player killed = (Player)e.getEntity();
-        if (!e.getCause().toString().startsWith("ENTITY_") && !e.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
-            if (killed.getHealth() <= e.getFinalDamage()) {
-                e.setCancelled(true);
-                onDeath(killed, null);
+        if (e.getEntity() instanceof Player) {
+            Player killed = (Player)e.getEntity();
+            if (!e.getCause().toString().startsWith("ENTITY_") && !e.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
+                if (killed.getHealth() <= e.getFinalDamage()) {
+                    e.setCancelled(true);
+                    onDeath(killed, null);
+                }
             }
         }
     }
@@ -161,6 +161,10 @@ public class InGame extends Phase {
     public void onLeafDecay(LeavesDecayEvent e){
         e.setCancelled(true);
     }
+    @EventHandler
+    public void onHangingEntityBreak(HangingBreakByEntityEvent e) { e.setCancelled(true); }
+    @EventHandler
+    public void onHangingInteract(PlayerInteractEntityEvent e) { e.setCancelled(true); }
     //endregion
     //region Runnables
     void startTimer() {
