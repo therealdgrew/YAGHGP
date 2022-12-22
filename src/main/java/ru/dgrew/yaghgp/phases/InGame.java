@@ -175,8 +175,11 @@ public class InGame extends Phase {
                     if (timer == 600 || timer == 540 || timer == 480 || timer == 450)
                         Bukkit.broadcastMessage(cm.getPrefix() + cm.getRefill(timer-420));
                     if (timer == 420){
+                        for(Player p : Bukkit.getOnlinePlayers()) {
+                            p.closeInventory();
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+                        }
                         lm.refillAllChests();
-                        for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                         Bukkit.broadcastMessage(cm.getPrefix() + cm.getRefillcommencing());
                     }
                     if (timer == 300 || timer == 180 || timer == 120 || timer == 60)
