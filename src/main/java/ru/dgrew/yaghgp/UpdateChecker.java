@@ -1,29 +1,29 @@
 package ru.dgrew.yaghgp;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Scanner;
-import java.util.function.Consumer;
+import java.net.URLConnection;
+
 public class UpdateChecker {
-    private final JavaPlugin plugin;
-    private final int resourceId;
-    public UpdateChecker(JavaPlugin plugin, int resourceId) {
-        this.plugin = plugin;
-        this.resourceId = resourceId;
+    int currentVersion;
+    int latestVersion;
+    public UpdateChecker(String currentVersion) {
+        this.currentVersion = Integer.parseInt(currentVersion.replace("v", "").replace(".", ""));
+        this.latestVersion = Integer.parseInt(getLatestVersion().replace("v", "").replace(".", ""));
     }
-    public void getVersion(final Consumer<String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
-            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
-                if (scanner.hasNext()) {
-                    consumer.accept(scanner.next());
-                }
-            } catch (IOException exception) {
-                plugin.getLogger().info("Unable to check for updates: " + exception.getMessage());
-            }
-        });
+    public String getLatestVersion() {
+        try {
+            URLConnection urlConnection = new URL("https://api.spigotmc.org/legacy/update.php?resource=106792").openConnection();
+            return new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).readLine();
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+    public void checkForUpdates() {
+        if (currentVersion < latestVersion) System.out.println("There is a new YAGHGP update available! Check it out here: https://www.spigotmc.org/resources/yaghgp-yet-another-generic-hunger-games-plugin.106792/updates");
+        else if (currentVersion == latestVersion) System.out.println("There are no YAGHGP updates available!");
+        else System.out.println("You are currently using an unreleased version of YAGHGP or the Spigot API has not updated yet!");
+        System.out.println("You are running "+ Main.getInstance().getDescription().getVersion() + ", latest is reported to be " + getLatestVersion() +".");
     }
 }
