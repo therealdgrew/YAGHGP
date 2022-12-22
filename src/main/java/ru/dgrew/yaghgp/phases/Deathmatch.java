@@ -166,6 +166,7 @@ public class Deathmatch extends Phase {
     }
     void checkForPlayerCount() {
         if (pm.getRemainingPlayersList().size() == 1) Main.getPm().nextPhase();
+        else Bukkit.broadcastMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
     }
     void onDeath(Player killed, Entity killerent) {
         Player killer;
@@ -189,6 +190,5 @@ public class Deathmatch extends Phase {
         killed.getWorld().strikeLightningEffect(killed.getLocation());
         pm.transferToSpectators(killed);
         checkForPlayerCount();
-        Bukkit.broadcastMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
     }
 }
