@@ -3,11 +3,14 @@ package ru.dgrew.yaghgp.phases;
 import org.bukkit.*;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -22,6 +25,9 @@ import ru.dgrew.yaghgp.Phase;
 import ru.dgrew.yaghgp.managers.ChatManager;
 import ru.dgrew.yaghgp.managers.LootManager;
 import ru.dgrew.yaghgp.managers.PlayerManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InGame extends Phase {
     private int timer;
@@ -128,20 +134,22 @@ public class InGame extends Phase {
         }
     }
     @EventHandler
-    public void onKill(PlayerDeathEvent e){
-        e.getEntity();
-        Player killed = e.getEntity();
-        if (e.getEntity().getKiller() instanceof Player) {
-            Player killer = e.getEntity().getKiller();
-            killer.sendMessage(cm.getPrefix() + cm.getKill().replace("{player}",killed.getName()));
-            killed.sendMessage(cm.getPrefix() + cm.getKilled().replace("{player}",killer.getName()));
+    public void onDeath(EntityDamageByEntityEvent e) {
+        Player killed = (Player)e.getEntity();
+        if (killed.getHealth() <= e.getFinalDamage()) {
+            e.setCancelled(true);
+            onDeath(killed, e.getDamager());
         }
-        else killed.sendMessage(cm.getPrefix() + cm.getKillednat());
-        killed.setHealth(20);
-        killed.getWorld().strikeLightningEffect(killed.getLocation());
-        pm.transferToSpectators(killed);
-        e.setDeathMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
-        checkForPlayerCount();
+    }
+    @EventHandler
+    public void onWorldDeath(EntityDamageEvent e) {
+        Player killed = (Player)e.getEntity();
+        if (!e.getCause().toString().startsWith("ENTITY_") && !e.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
+            if (killed.getHealth() <= e.getFinalDamage()) {
+                e.setCancelled(true);
+                onDeath(killed, null);
+            }
+        }
     }
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
@@ -195,5 +203,29 @@ public class InGame extends Phase {
         if (pm.getRemainingPlayersList().size() <= 7) {
             timer = 480;
         }
+    }
+    void onDeath(Player killed, Entity killerent) {
+        Player killer;
+        if (killerent instanceof Player) {
+            killer = (Player)killerent;
+            killer.sendMessage(cm.getPrefix() + cm.getKill().replace("{player}",killed.getName()));
+            killed.sendMessage(cm.getPrefix() + cm.getKilled().replace("{player}",killer.getName()));
+        }
+        else if (killerent instanceof Projectile) {
+            Projectile pj = (Projectile)killerent;
+            killer = (Player)pj.getShooter();
+            killer.sendMessage(cm.getPrefix() + cm.getKill().replace("{player}",killed.getName()));
+            killed.sendMessage(cm.getPrefix() + cm.getKilled().replace("{player}",killer.getName()));
+        }
+        else killed.sendMessage(cm.getPrefix() + cm.getKillednat());
+        List<ItemStack> items = new ArrayList<>();
+        for (ItemStack i : killed.getInventory()) items.add(i);
+        killed.getInventory().clear();
+        for (ItemStack i : items) if (i != null) killed.getWorld().dropItem(killed.getLocation(), i).setPickupDelay(20);
+        killed.setHealth(20);
+        killed.getWorld().strikeLightningEffect(killed.getLocation());
+        pm.transferToSpectators(killed);
+        Bukkit.broadcastMessage(cm.getGlobalkill().replace("{players}", String.valueOf(pm.getRemainingPlayersList().size())));
+        checkForPlayerCount();
     }
 }

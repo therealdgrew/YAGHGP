@@ -67,7 +67,6 @@ public class LootManager {
         eweapons.add(new ItemStack(Material.STONE_SWORD,1));
         eweapons.add(new ItemStack(Material.STONE_AXE,1));
         eweapons.add(new ItemStack(Material.BOW,1));
-        eweapons.add(new ItemStack(Material.CROSSBOW,1));
     }
     void fillArmor(){
         armor.add(new ItemStack(Material.LEATHER_HELMET,1));

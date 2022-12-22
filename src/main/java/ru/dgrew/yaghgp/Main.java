@@ -32,13 +32,11 @@ public class Main extends JavaPlugin implements Listener {
         lobby.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         lobby.setGameRule(GameRule.DO_FIRE_TICK, false);
         lobby.setGameRule(GameRule.DO_TILE_DROPS, false);
-        lobby.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
         arena.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         arena.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         arena.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         arena.setGameRule(GameRule.DO_FIRE_TICK, false);
         arena.setGameRule(GameRule.DO_TILE_DROPS, false);
-        arena.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
         lobby.setTime(5000);
         arena.setTime(5000);
         arena.setDifficulty(Difficulty.HARD);
