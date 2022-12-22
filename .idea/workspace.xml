@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Fix arrow death message and Maven build version">
+    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Additional fix for player count broadcast at 1 tribute">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +118,35 @@
       <option name="project" value="LOCAL" />
       <updated>1671706403917</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add item frame and painting protection">
+      <created>1671715897911</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671715897911</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fix chest refill while chest is open">
+      <created>1671717775038</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671717775038</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Bump plugin version, add update checker">
+      <created>1671718530426</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671718530426</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Additional fix for player count broadcast at 1 tribute">
+      <created>1671719775884</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671719775885</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -148,6 +174,10 @@
     <MESSAGE value="Filled config coordinate strings, added message on error" />
     <MESSAGE value="Removed crossbows and recoded death and respawn methods to achieve compatibility with 1.13 and 1.14" />
     <MESSAGE value="Fix arrow death message and Maven build version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix arrow death message and Maven build version" />
+    <MESSAGE value="Add item frame and painting protection" />
+    <MESSAGE value="Fix chest refill while chest is open" />
+    <MESSAGE value="Bump plugin version, add update checker" />
+    <MESSAGE value="Additional fix for player count broadcast at 1 tribute" />
+    <option name="LAST_COMMIT_MESSAGE" value="Additional fix for player count broadcast at 1 tribute" />
   </component>
 </project>
