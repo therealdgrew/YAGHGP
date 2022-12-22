@@ -44,6 +44,13 @@ public class Main extends JavaPlugin implements Listener {
         for(Entity e : lobby.getEntities()) e.remove();
         for(Entity e : arena.getEntities()) e.remove();
         this.getCommand("start").setExecutor(new Start());
+        new UpdateChecker(this, 106792).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                System.out.println("There are no YAGHGP updates available!");
+            } else {
+                System.out.println("There is a new YAGHGP update available! Check it out here: https://www.spigotmc.org/resources/yaghgp-yet-another-generic-hunger-games-plugin.106792/updates");
+            }
+        });
     }
     public void onDisable() {
 

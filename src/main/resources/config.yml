@@ -44,6 +44,6 @@ messages:
   refill: "&fAll chests will be refilled in {timer} {m}!"
   refill-commencing: "&fAll chests have been refilled!"
   summary:
-    - ""
-    - "big"
-    - ""
+    - "Game summary is coming soon!"
+    - "It will be broadcasted once the game is over"
+    - "And will feature a full-fledged kill leaderboard!"
