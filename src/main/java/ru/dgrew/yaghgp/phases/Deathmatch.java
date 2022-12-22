@@ -104,7 +104,7 @@ public class Deathmatch extends Phase {
     @EventHandler
     public void onWorldDeath(EntityDamageEvent e) {
         Player killed = (Player)e.getEntity();
-        if (!e.getCause().toString().startsWith("ENTITY_")) {
+        if (!e.getCause().toString().startsWith("ENTITY_") && !e.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
             if (killed.getHealth() <= e.getFinalDamage()) {
                 e.setCancelled(true);
                 onDeath(killed, null);
