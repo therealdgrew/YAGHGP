@@ -79,7 +79,9 @@ public class PreGame extends Phase {
     }
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
-        e.setCancelled(true);
+        if (e.getTo().getBlockX() != e.getFrom().getBlockX() || e.getTo().getBlockY() != e.getFrom().getBlockY() || e.getTo().getBlockZ() != e.getFrom().getBlockZ()) {
+            e.setCancelled(true);
+        }
     }
     //endregion
     //region Runnables

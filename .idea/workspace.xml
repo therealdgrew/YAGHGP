@@ -9,8 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Additional fix for player count broadcast at 1 tribute">
+    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="I have spent 5 hours fixing the update checker and I regret NOTHING">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +149,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671719775885</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixed item hitting out of item frame">
+      <created>1671721278983</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671721278983</updated>
+    </task>
+    <task id="LOCAL-00013" summary="I have spent 5 hours fixing the update checker and I regret NOTHING">
+      <created>1671745661308</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671745661308</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -178,6 +195,8 @@
     <MESSAGE value="Fix chest refill while chest is open" />
     <MESSAGE value="Bump plugin version, add update checker" />
     <MESSAGE value="Additional fix for player count broadcast at 1 tribute" />
-    <option name="LAST_COMMIT_MESSAGE" value="Additional fix for player count broadcast at 1 tribute" />
+    <MESSAGE value="Fixed item hitting out of item frame" />
+    <MESSAGE value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
+    <option name="LAST_COMMIT_MESSAGE" value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
   </component>
 </project>
