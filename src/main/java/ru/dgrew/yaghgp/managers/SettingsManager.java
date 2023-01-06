@@ -72,6 +72,8 @@ public class SettingsManager {
     }
     private int borderRadius;
     public Integer getBorderRadius() { return borderRadius; }
+    private boolean updateCheck;
+    public boolean getUpdateCheck() { return updateCheck; }
     void setUpEntries() {
         lobby = config.getString("settings.lobby");
         lobbySpawn = config.getString("settings.lobby-spawn");
@@ -79,5 +81,6 @@ public class SettingsManager {
         coordinates = config.getStringList("settings.arena-spawns");
         arenaCenter = config.getString("settings.arena-center");
         borderRadius = config.getInt("settings.world-border-radius");
+        updateCheck = config.getBoolean("settings.check-for-updates");
     }
 }

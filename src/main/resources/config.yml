@@ -1,5 +1,7 @@
 #Controls general gamemode settings. Individual settings have their own descriptions.
 settings:
+  #Allows you to enable or disable update checking.
+  check-for-updates: true
   #Controls the name of the world you wish to use as a lobby.
   lobby: "lobby"
   #Controls the coordinates of a universal spawn point of the lobby world.
