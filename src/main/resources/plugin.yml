@@ -1,7 +1,10 @@
 name: YAGHGP
 main: ru.dgrew.yaghgp.Main
-version: 1.1.2
+version: '${project.version}'
 api-version: 1.13
+authors: [ DGrew ]
+description: Yet Another Generic Hunger Games Plugin
 commands:
   start:
     description: "/start - Starts a Hunger Games session for all online players."
+

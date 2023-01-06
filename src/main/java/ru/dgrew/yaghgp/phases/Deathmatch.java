@@ -62,21 +62,16 @@ public class Deathmatch extends Phase {
         if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
     }
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
-        if (e.getItemInHand() == new ItemStack(Material.FLINT_AND_STEEL)) e.setCancelled(true);
-    }
-    @EventHandler
     public void onBlockIgnite(BlockIgniteEvent e) {
         if (!e.getCause().equals(BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL)) e.setCancelled(true);
     }
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK)
-            if (e.getClickedBlock().getType().name().startsWith("POTTED_") ||
-                    e.getClickedBlock().getType() == Material.FLOWER_POT ||
-                    e.getClickedBlock().getType().name().endsWith("_LOG") ||
-                    e.getClickedBlock().getType().name().endsWith("_WOOD"))
-                e.setCancelled(true);
+        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getClickedBlock().getType().name().startsWith("POTTED_") || e.getClickedBlock().getType() == Material.FLOWER_POT) e.setCancelled(true);
+            if ((e.getClickedBlock().getType().name().endsWith("_LOG") || e.getClickedBlock().getType().name().endsWith("_WOOD"))
+                    && e.getMaterial().name().endsWith("_AXE")) e.setCancelled(true);
+        }
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -130,6 +125,8 @@ public class Deathmatch extends Phase {
     public void onPaintingBreak(HangingBreakByEntityEvent e) { e.setCancelled(true); }
     @EventHandler
     public void onHangingInteract(PlayerInteractEntityEvent e) { e.setCancelled(true); }
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) { if (!e.getItemInHand().getType().equals(Material.FLINT_AND_STEEL)) e.setCancelled(true); }
     //endregion
     //region Runnables
     void startTimer() {

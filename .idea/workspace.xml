@@ -9,11 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="I have spent 5 hours fixing the update checker and I regret NOTHING">
+    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Minor fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/EndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/EndGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,12 +59,25 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/IdeaProjects/YAGHGP&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/IdeaProjects/Market&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -163,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671745661308</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Minor fixes">
+      <created>1672586730910</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672586730910</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -197,6 +219,7 @@
     <MESSAGE value="Additional fix for player count broadcast at 1 tribute" />
     <MESSAGE value="Fixed item hitting out of item frame" />
     <MESSAGE value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
-    <option name="LAST_COMMIT_MESSAGE" value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
+    <MESSAGE value="Minor fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor fixes" />
   </component>
 </project>
