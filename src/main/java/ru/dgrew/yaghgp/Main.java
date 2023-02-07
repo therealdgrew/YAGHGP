@@ -44,7 +44,12 @@ public class Main extends JavaPlugin implements Listener {
         for(Entity e : lobby.getEntities()) e.remove();
         for(Entity e : arena.getEntities()) e.remove();
         this.getCommand("start").setExecutor(new Start());
-        if (sm.getUpdateCheck()) new UpdateChecker(getDescription().getVersion()).checkForUpdates();
+        int pluginId = 17670;
+        Metrics metrics = new Metrics(this, pluginId);
+        if (sm.getUpdateCheck()) {
+            UpdateChecker uc = new UpdateChecker(getDescription().getVersion());
+            uc.checkForUpdates();
+        }
     }
     public void onDisable() {
 

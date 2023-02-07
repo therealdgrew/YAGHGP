@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Fix inability to interact with logs, pom and plugin.yml improvements">
+    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Add bstats metrics">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Metrics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/SettingsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,20 +48,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/IdeaProjects/Market&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "ignore.preview.features.used": "true",
+    "last_opened_file_path": "C:/Users/user/IdeaProjects/YAGHGP",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15234375",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -191,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673017369193</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Bump version, add update check disable option to config.yml">
+      <created>1673020264010</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1673020264010</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -227,6 +233,8 @@
     <MESSAGE value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
     <MESSAGE value="Minor fixes" />
     <MESSAGE value="Fix inability to interact with logs, pom and plugin.yml improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix inability to interact with logs, pom and plugin.yml improvements" />
+    <MESSAGE value="Bump version, add update check disable option to config.yml" />
+    <MESSAGE value="Add bstats metrics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add bstats metrics" />
   </component>
 </project>
