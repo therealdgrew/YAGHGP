@@ -1,5 +1,6 @@
 package ru.dgrew.yaghgp.phases;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -21,7 +22,7 @@ public class Lobby extends Phase {
     @Override
     public void onEnable() {
         sm = new SettingsManager(Main.getInstance().getConfig());
-        System.out.println("Lobby phase has started successfully!");
+        Bukkit.getLogger().info("Lobby phase has started successfully!");
     }
     @Override
     public void onDisable() {

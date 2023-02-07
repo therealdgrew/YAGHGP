@@ -41,7 +41,7 @@ public class InGame extends Phase {
         pm.updatePlayersList();
         for (Player p : pm.getRemainingPlayersList()) p.setGameMode(GameMode.SURVIVAL);
         startTimer();
-        System.out.println("InGame phase has started successfully!");
+        Bukkit.getLogger().info("InGame phase has started successfully!");
     }
 
     @Override

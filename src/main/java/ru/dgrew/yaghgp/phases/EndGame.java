@@ -35,7 +35,7 @@ public class EndGame extends Phase {
         victor.playSound(victor.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1, 1);
         Bukkit.broadcastMessage(cm.getPrefix() + cm.getGlobalvictory().replace("{player}", victor.getName()));
         startTimer();
-        System.out.println("EndGame phase has started successfully!");
+        Bukkit.getLogger().info("EndGame phase has started successfully!");
     }
     @Override
     public void onDisable() {

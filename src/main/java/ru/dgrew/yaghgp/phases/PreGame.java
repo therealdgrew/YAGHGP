@@ -37,7 +37,7 @@ public class PreGame extends Phase {
         startCountdown();
         scatterPlayers();
         sm.getArenaobj().setAutoSave(false);
-        System.out.println("PreGame phase has started successfully!");
+        Bukkit.getLogger().info("PreGame phase has started successfully!");
     }
     @Override
     public void onDisable() {
@@ -108,7 +108,7 @@ public class PreGame extends Phase {
     }
     //endregion
     void scatterPlayers() {
-        System.out.println("Scattering players...");
+        Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();
         List<Location> list = sm.fetchCorrectedCoordinates();
         int var;
@@ -117,6 +117,6 @@ public class PreGame extends Phase {
             player.teleport(list.get(var));
             list.remove(var);
         }
-        System.out.println("All online players should now be scattered!");
+        Bukkit.getLogger().info("All online players should now be scattered!");
     }
 }

@@ -7,4 +7,3 @@ description: Yet Another Generic Hunger Games Plugin
 commands:
   start:
     description: "/start - Starts a Hunger Games session for all online players."
-

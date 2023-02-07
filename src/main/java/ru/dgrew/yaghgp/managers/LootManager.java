@@ -1,5 +1,6 @@
 package ru.dgrew.yaghgp.managers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -17,7 +18,7 @@ public class LootManager {
         fillEArmor();
         fillOther();
         fillEOther();
-        System.out.println("Loot tables filled!");
+        Bukkit.getLogger().info("Loot tables filled!");
     }
     List<ItemStack> food = new ArrayList<>();
     List<ItemStack> efood = new ArrayList<>();
