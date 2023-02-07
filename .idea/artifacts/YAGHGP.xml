@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="YAGHGP">
+  <artifact type="jar" build-on-make="true" name="YAGHGP">
     <output-path>$PROJECT_DIR$/out/artifacts/YAGHGP</output-path>
     <root id="archive" name="YAGHGP.jar">
       <element id="module-output" name="YAGHGP" />
