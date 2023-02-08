@@ -23,7 +23,7 @@ import ru.dgrew.yaghgp.managers.SettingsManager;
 import java.util.List;
 import java.util.Random;
 
-public class PreGame extends Phase {
+public class InvincibilityPeriod extends Phase {
     private int timer;
     private ChatManager cm;
     private SettingsManager sm;
@@ -33,11 +33,10 @@ public class PreGame extends Phase {
     public void onEnable() {
         sm = Main.getSm();
         cm = Main.getCm();
-        timer = 10;
+        timer = 120;
         startCountdown();
-        scatterPlayers();
         sm.getArenaobj().setAutoSave(false);
-        Bukkit.getLogger().info("PreGame phase has started successfully!");
+        Bukkit.getLogger().info("InvincibilityPeriod phase has started successfully!");
     }
     @Override
     public void onDisable() {
@@ -45,7 +44,7 @@ public class PreGame extends Phase {
     }
     @Override
     public Phase next() {
-        return new InvincibilityPeriod();
+        return new InGame();
     }
     //endregion
     //region Phase Listeners
@@ -62,24 +61,8 @@ public class PreGame extends Phase {
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
     @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onLeafDecay(LeavesDecayEvent e){
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
     public void onWorldDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e){
-        if (e.getTo().getBlockX() != e.getFrom().getBlockX() || e.getTo().getBlockY() != e.getFrom().getBlockY() || e.getTo().getBlockZ() != e.getFrom().getBlockZ()) {
+        if (e.getEntity() instanceof Player){
             e.setCancelled(true);
         }
     }
@@ -90,6 +73,10 @@ public class PreGame extends Phase {
             @Override
             public void run() {
                 if (timer > 0) {
+                    if (timer == 120) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
+                    if (timer == 90) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
+                    if (timer == 60) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
+                    if (timer == 30) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
                     if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
                     if (timer <= 5) {
                         for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
@@ -98,24 +85,11 @@ public class PreGame extends Phase {
 
                     timer--;
                 } else {
-                    for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
+                    for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                     Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimerend());
                     Main.getPm().nextPhase();
                 }
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
-    }
-    //endregion
-    void scatterPlayers() {
-        Bukkit.getLogger().info("Scattering players...");
-        Random random = new Random();
-        List<Location> list = sm.fetchCorrectedCoordinates();
-        int var;
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            var = random.nextInt(list.size());
-            player.teleport(list.get(var));
-            list.remove(var);
-        }
-        Bukkit.getLogger().info("All online players should now be scattered!");
     }
 }

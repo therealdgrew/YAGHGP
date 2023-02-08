@@ -49,22 +49,6 @@ public class EndGame extends Phase {
     //endregion
     //region Phase Listeners
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        if (!e.getBlock().getType().name().endsWith("_LEAVES") && !(e.getBlock().getType().name().endsWith("FIRE")) && !(e.getBlock().getType().name().endsWith("GRASS"))) e.setCancelled(true);
-    }
-    @EventHandler
-    public void onBlockIgnite(BlockIgniteEvent e) {
-        if (!e.getCause().equals(BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL)) e.setCancelled(true);
-    }
-    @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (e.getClickedBlock().getType().name().startsWith("POTTED_") || e.getClickedBlock().getType() == Material.FLOWER_POT) e.setCancelled(true);
-            if ((e.getClickedBlock().getType().name().endsWith("_LOG") || e.getClickedBlock().getType().name().endsWith("_WOOD"))
-                    && e.getMaterial().name().endsWith("_AXE")) e.setCancelled(true);
-        }
-    }
-    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         e.setJoinMessage(null);
         e.getPlayer().kickPlayer("Game already started!");
@@ -76,20 +60,6 @@ public class EndGame extends Phase {
     }
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onLeafDecay(LeavesDecayEvent e){
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onWorldDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
-    }
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) { if (!e.getItemInHand().getType().equals(Material.FLINT_AND_STEEL)) e.setCancelled(true); }
     //endregion
     //region Runnables
     void startTimer() {

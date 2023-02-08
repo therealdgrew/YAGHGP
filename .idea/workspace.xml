@@ -1,242 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="YAGHGP" />
-    </artifacts-to-build>
-  </component>
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="Replaced System.out.print calls with plugin logger calls">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/YAGHGP.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/YAGHGP.xml" afterDir="false" />
+    <list default="true" id="3784dd68-6b9e-4920-8eca-4aeee6c7ee2c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InvincibilityPeriod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/YAGHGP.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/EndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/EndGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2LSEbNERhAzIRUpuh64BjpuekNn" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.dgrew.yaghgp.phases" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
       <list>
-        <option value="Class" />
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="PUSH_AUTO_UPDATE" value="true" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="2IfqorD5Qh1AVW7FMVOGSPkw6jj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "ignore.preview.features.used": "true",
-    "last_opened_file_path": "C:/Users/user/IdeaProjects/YAGHGP",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15234375",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
-  }
-}]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4baf8848-0efb-4d3a-b61b-9365a0a72965" name="Changes" comment="" />
-      <created>1670583163392</created>
+      <changelist id="3784dd68-6b9e-4920-8eca-4aeee6c7ee2c" name="Default Changelist" comment="" />
+      <created>1675856153659</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1670583163392</updated>
+      <updated>1675856153659</updated>
     </task>
-    <task id="LOCAL-00001" summary="Fixes and refactoring">
-      <created>1671218635708</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1671218635708</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Logging changes, removal of debug messages, further fixes">
-      <created>1671277464595</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1671277464595</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Bump plugin version, removal of unnecessary dependencies">
-      <created>1671277591688</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1671277591688</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Fixed topless log shearing, flint &amp; steel, deathmatch grace period">
-      <created>1671305812530</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1671305812530</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Filled config coordinate strings, added message on error">
-      <created>1671450021193</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1671450021193</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Removed crossbows and recoded death and respawn methods to achieve compatibility with 1.13 and 1.14">
-      <created>1671705867692</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1671705867693</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Fix arrow death message and Maven build version">
-      <created>1671706403917</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1671706403917</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Add item frame and painting protection">
-      <created>1671715897911</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1671715897911</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Fix chest refill while chest is open">
-      <created>1671717775038</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1671717775038</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Bump plugin version, add update checker">
-      <created>1671718530426</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1671718530426</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Additional fix for player count broadcast at 1 tribute">
-      <created>1671719775884</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1671719775885</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Fixed item hitting out of item frame">
-      <created>1671721278983</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1671721278983</updated>
-    </task>
-    <task id="LOCAL-00013" summary="I have spent 5 hours fixing the update checker and I regret NOTHING">
-      <created>1671745661308</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1671745661308</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Minor fixes">
-      <created>1672586730910</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1672586730910</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Fix inability to interact with logs, pom and plugin.yml improvements">
-      <created>1673017369193</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1673017369193</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Bump version, add update check disable option to config.yml">
-      <created>1673020264010</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1673020264010</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
     <servers />
-  </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="config.yml" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Initial commit" />
-    <MESSAGE value="Fixes and refactoring" />
-    <MESSAGE value="Logging changes, removal of debug messages, further fixes" />
-    <MESSAGE value="Bump plugin version, removal of unnecessary dependencies" />
-    <MESSAGE value="Fixed topless log shearing and flint &amp; steel again" />
-    <MESSAGE value="Fixed topless log shearing, flint &amp; steel, deathmatch grace period" />
-    <MESSAGE value="Filled config coordinate strings, added message on error" />
-    <MESSAGE value="Removed crossbows and recoded death and respawn methods to achieve compatibility with 1.13 and 1.14" />
-    <MESSAGE value="Fix arrow death message and Maven build version" />
-    <MESSAGE value="Add item frame and painting protection" />
-    <MESSAGE value="Fix chest refill while chest is open" />
-    <MESSAGE value="Bump plugin version, add update checker" />
-    <MESSAGE value="Additional fix for player count broadcast at 1 tribute" />
-    <MESSAGE value="Fixed item hitting out of item frame" />
-    <MESSAGE value="I have spent 5 hours fixing the update checker and I regret NOTHING" />
-    <MESSAGE value="Minor fixes" />
-    <MESSAGE value="Fix inability to interact with logs, pom and plugin.yml improvements" />
-    <MESSAGE value="Bump version, add update check disable option to config.yml" />
-    <MESSAGE value="Add bstats metrics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add bstats metrics" />
   </component>
 </project>
