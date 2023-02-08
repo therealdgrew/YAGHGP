@@ -38,8 +38,6 @@ public class InGame extends Phase {
         cm = Main.getCm();
         lm = new LootManager();
         pm = Main.getPlm();
-        pm.updatePlayersList();
-        for (Player p : pm.getRemainingPlayersList()) p.setGameMode(GameMode.SURVIVAL);
         startTimer();
         Bukkit.getLogger().info("InGame phase has started successfully!");
     }
@@ -133,16 +131,6 @@ public class InGame extends Phase {
     }
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onLeafDecay(LeavesDecayEvent e){ e.setCancelled(true); }
-    @EventHandler
-    public void onHangingEntityBreak(HangingBreakByEntityEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onHangingInteract(PlayerInteractEntityEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) { if (!e.getItemInHand().getType().equals(Material.FLINT_AND_STEEL)) e.setCancelled(true); }
     //endregion
     //region Runnables
     void startTimer() {

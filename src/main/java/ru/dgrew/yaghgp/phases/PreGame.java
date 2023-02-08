@@ -79,7 +79,7 @@ public class PreGame extends Phase {
     }
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
-        if (e.getTo().getBlockX() != e.getFrom().getBlockX() || e.getTo().getBlockY() != e.getFrom().getBlockY() || e.getTo().getBlockZ() != e.getFrom().getBlockZ()) {
+        if (e.getTo().getBlockX() != e.getFrom().getBlockX() || e.getTo().getBlockZ() != e.getFrom().getBlockZ()) {
             e.setCancelled(true);
         }
     }
@@ -90,10 +90,10 @@ public class PreGame extends Phase {
             @Override
             public void run() {
                 if (timer > 0) {
-                    if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
+                    if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getStartTimer(timer));
                     if (timer <= 5) {
                         for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                        Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimer(timer));
+                        Bukkit.broadcastMessage(cm.getPrefix() + cm.getStartTimer(timer));
                     }
 
                     timer--;

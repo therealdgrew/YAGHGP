@@ -1,3 +1,5 @@
+Note: This is a fork of Spigot plugin YAGHGP, which I am using as the basis of a personal project. Trying to recreate the MCPVP 2011-2013 era type of hunger games mode :)
+
 # YAGHGP - Yet Another Generic Hunger Games Plugin
 ## What is YAGHGP?
 Yet Another Generic Hunger Games Plugin (abbreviated as YAGHGP) is a Hunger Games plugin created and updated for modern Minecraft versions featuring high customizability, extensive support and guaranteed compatibility with the latest Minecraft version.

@@ -23,12 +23,13 @@ settings:
 #Controls messages output by the plugin.
 #Placeholders provided in existing messages only work with these messages.
 messages:
-  prefix: "&e&lHungerGames &8| &r"
+  prefix: "&e&lMC-HG &8| &r"
   no-permission: "&cYou do not have permission to perform this command."
   game-started: "&fGame has successfully started!"
   lobby-timer-notifications: "&fVoting concludes in {timer} {m}!"
   launch-cancelled: "&fNot enough players for the game to start! Timer aborted."
-  global-timer-notifications: "&fThe game will commence in {timer} {m}!"
+  start-timer-notifications: "&fThe game will commence in {timer} {m}!"
+  invincibility-timer-notifications: "&fInvincibility will wear off in {timer} {m}!"
   global-game-started: "&fGame is now commencing!"
   grace-period: "&fGrace period will end in {timer} {m}!"
   grace-period-ended: "&fGrace period has ended!"
@@ -45,6 +46,7 @@ messages:
   endgame: "&fThe server will restart in {timer} {m}."
   refill: "&fAll chests will be refilled in {timer} {m}!"
   refill-commencing: "&fAll chests have been refilled!"
+  lobby-player-counter: "&fThere are {count} players waiting for the game to begin."
   summary:
     - "Game summary is coming soon!"
     - "It will be broadcasted once the game is over"

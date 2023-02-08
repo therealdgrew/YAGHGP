@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="YAGHGP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/YAGHGP_jar</output-path>
+    <root id="archive" name="YAGHGP.jar">
+      <element id="module-output" name="YAGHGP" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+    </root>
+  </artifact>
+</component>

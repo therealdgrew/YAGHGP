@@ -28,6 +28,9 @@ public class ChatManager {
         if (timer != 1) return s.replace("{m}","seconds");
         else return s.replace("{m}", "second");
     }
+    private String formatCount(String s, int count) {
+        return s.replace("{count}", String.valueOf(count));
+    }
     private String prefix;
     public String getPrefix() { return prefix; }
     private String perm;
@@ -44,9 +47,13 @@ public class ChatManager {
     public String getCancelled() {
         return cancelled;
     }
-    private String timer;
-    public String getTimer(int timer) {
-        return formatTime(this.timer, timer);
+    private String startTimer;
+    public String getStartTimer(int timer) {
+        return formatTime(this.startTimer, timer);
+    }
+    private String invincibilityTimer;
+    public String getInvincibilityTimer(int timer) {
+        return formatTime(this.invincibilityTimer, timer);
     }
     private String timerend;
     public String getTimerend() { return timerend; }
@@ -76,6 +83,8 @@ public class ChatManager {
     public String getRefill(int timer) { return formatTime(refill, timer); }
     private String refillcommencing;
     public String getRefillcommencing() { return refillcommencing; }
+    private String lobbyPlayerCounter;
+    public String getLobbyPlayerCounter(int count) { return formatCount(lobbyPlayerCounter, count); }
     private void setUpEntries(){
         prefix = format(config.getString("messages.prefix"));
         perm = format(config.getString("messages.no-permission"));
@@ -83,7 +92,8 @@ public class ChatManager {
         summary = formatList(config.getStringList("messages.summary"));
         lobbytimer = format(config.getString("messages.lobby-timer-notifications"));
         cancelled = format(config.getString("messages.launch-cancelled"));
-        timer = format(config.getString("messages.global-timer-notifications"));
+        startTimer = format(config.getString("messages.start-timer-notifications"));
+        invincibilityTimer = format(config.getString("messages.invincibility-timer-notifications"));
         timerend = format(config.getString("messages.global-game-started"));
         globalkill = format(config.getString("messages.global-kill"));
         kill = format(config.getString("messages.kill"));
@@ -98,5 +108,6 @@ public class ChatManager {
         endgame = format(config.getString("messages.endgame"));
         refill = format(config.getString("messages.refill"));
         refillcommencing = format(config.getString("messages.refill-commencing"));
+        lobbyPlayerCounter = format(config.getString("messages.lobby-player-counter"));
     }
 }

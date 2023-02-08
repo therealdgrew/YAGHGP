@@ -14,14 +14,17 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import ru.dgrew.yaghgp.Main;
 import ru.dgrew.yaghgp.Phase;
+import ru.dgrew.yaghgp.managers.ChatManager;
 import ru.dgrew.yaghgp.managers.SettingsManager;
 
 public class Lobby extends Phase {
     private SettingsManager sm;
+    private ChatManager cm;
     //region Phase Methods
     @Override
     public void onEnable() {
         sm = new SettingsManager(Main.getInstance().getConfig());
+        cm = Main.getCm();
         Bukkit.getLogger().info("Lobby phase has started successfully!");
     }
     @Override
@@ -37,6 +40,7 @@ public class Lobby extends Phase {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         e.setJoinMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has joined!");
+        Bukkit.broadcastMessage(cm.getPrefix() + cm.getLobbyPlayerCounter(Bukkit.getOnlinePlayers().size()));
         p.teleport(sm.fetchLobbySpawn());
         p.setGameMode(GameMode.ADVENTURE);
         p.setExp(0);
