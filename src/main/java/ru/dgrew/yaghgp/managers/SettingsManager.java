@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SettingsManager {
     final private FileConfiguration config;
@@ -41,35 +43,33 @@ public class SettingsManager {
         worldobj = Bukkit.getWorld(arena);
         return worldobj;
     }
-    private List<String> coordinates;
-    final private List<Location> correctedCoordinates = new ArrayList<>();
-    public List<Location> fetchCorrectedCoordinates() {
+    final private List<Location> spawnLocations = new ArrayList<>();
+    public List<Location> fetchSpawnLocations() {
+        Random random = new Random();
         try {
-            if (correctedCoordinates.size()==0) {
-                String[] coords;
-                for (String s : coordinates) {
-                    coords = s.split(":");
-                    correctedCoordinates.add(new Location(getArenaobj(),
-                            Double.parseDouble(coords[0]),
-                            Double.parseDouble(coords[1]),
-                            Double.parseDouble(coords[2]),
-                            Float.parseFloat(coords[3]),
-                            Float.parseFloat(coords[4])));
+            if (spawnLocations.size()==0) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    spawnLocations.add(new Location(getArenaobj(),
+                            random.nextInt(60)-30,
+                            80,
+                            random.nextInt(60)-30
+                            )
+                    );
                 }
-                return correctedCoordinates;
+                return spawnLocations;
             }
-            else return correctedCoordinates;
+            else return spawnLocations;
         }
-        catch (NumberFormatException e) {
-            Bukkit.getLogger().severe("Arena coordinates are not set up or set up incorrectly in the plugin config! Please set up the coordinates and restart the server! Related stack trace below:");
+        catch (Exception e) {
+            Bukkit.getLogger().severe("Could not generate spawn locations for players!");
             return null;
         }
     }
-    private String arenaCenter;
     public Location fetchArenaCenter() {
-        String[] coords = arenaCenter.split(":");
-        return new Location(getArenaobj(), Double.parseDouble(coords[0]), 0, Double.parseDouble(coords[1]));
+        return new Location(getArenaobj(), 0, 0, 0);
     }
+    private int deathmatchBorderRadius;
+    public Integer getDeathmatchBorderRadius() { return deathmatchBorderRadius; }
     private int borderRadius;
     public Integer getBorderRadius() { return borderRadius; }
     private boolean updateCheck;
@@ -78,8 +78,7 @@ public class SettingsManager {
         lobby = config.getString("settings.lobby");
         lobbySpawn = config.getString("settings.lobby-spawn");
         arena = config.getString("settings.arena");
-        coordinates = config.getStringList("settings.arena-spawns");
-        arenaCenter = config.getString("settings.arena-center");
+        deathmatchBorderRadius = config.getInt("settings.deathmatch-border-radius");
         borderRadius = config.getInt("settings.world-border-radius");
         updateCheck = config.getBoolean("settings.check-for-updates");
     }

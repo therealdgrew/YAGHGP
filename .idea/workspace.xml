@@ -7,14 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3784dd68-6b9e-4920-8eca-4aeee6c7ee2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/YAGHGP_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/ChatManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/ChatManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/managers/SettingsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Deathmatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InvincibilityPeriod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/InvincibilityPeriod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/Lobby.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dgrew/yaghgp/phases/PreGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>

@@ -10,6 +10,9 @@ import ru.dgrew.yaghgp.managers.PhaseManager;
 import ru.dgrew.yaghgp.managers.PlayerManager;
 import ru.dgrew.yaghgp.managers.SettingsManager;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Main extends JavaPlugin implements Listener {
     private static Main instance;
     private static ChatManager cm;
@@ -27,6 +30,8 @@ public class Main extends JavaPlugin implements Listener {
         sm = new SettingsManager(this.getConfig());
         lobby = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.lobby", "arena")));
         arena = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.arena", "arena")));
+        deleteArena();
+        arena = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.arena", "arena")));
         lobby.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         lobby.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         lobby.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
@@ -36,7 +41,7 @@ public class Main extends JavaPlugin implements Listener {
         lobby.setTime(5000);
         arena.setTime(500);
         arena.setDifficulty(Difficulty.NORMAL);
-        arena.getWorldBorder().setSize(300);
+        arena.getWorldBorder().setSize(sm.getBorderRadius());
         for(Entity e : lobby.getEntities()) e.remove();
         this.getCommand("start").setExecutor(new Start());
         int pluginId = 17670;
@@ -46,6 +51,36 @@ public class Main extends JavaPlugin implements Listener {
             uc.checkForUpdates();
         }
     }
+
+    private void deleteArena() {
+        try {
+            Bukkit.getLogger().info("Deleting current arena world...");
+            World lobby = Bukkit.getWorld(this.getConfig().getString("settings.arena", "arena"));
+            File deleteFolder = lobby.getWorldFolder();
+            Bukkit.unloadWorld(lobby, false);
+
+            deleteWorld(deleteFolder);
+            Bukkit.getLogger().info("Arena deleted successfully!");
+        } catch (Exception ex) {
+            Bukkit.getLogger().severe("Could not delete arena world!");
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean deleteWorld(File path) {
+        if(path.exists()) {
+            File files[] = path.listFiles();
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteWorld(files[i]);
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return(path.delete());
+    }
+
     public void onDisable() {
 
     }

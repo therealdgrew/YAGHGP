@@ -9,17 +9,10 @@ settings:
   lobby-spawn: "100.0:64.0:100.0:0.0f:0.0f" #Example coordinates
   #Controls the name of the world you wish to use as a Hunger Games arena.
   arena: "arena"
-  #Controls arena spawn spots.
-  #Coordinates are presented in a form of a list, chosen first to last and assigned to players in join order.
-  #Coordinates are strings written like this: X:Y:Z:pitch:yaw, where : is the separator which should be included between values.
-  #In order for pitch and yaw to work as intended, please put an 'f' in the end of the value.
-  arena-spawns:
-    - "100.0:64.0:100.0:0.0f:0.0f" #Example coordinates
-    - "110.0:64.0:100.0:180.0f:0.0f" #Example coordinates
-  #Controls the center of the arena (at the cornucopia). Used for setting a world border.
-  arena-center: "100.0:100.0" #Example arena center: "100.0:100.0"
   #Controls the radius of the world border.
-  world-border-radius: 50
+  world-border-radius: 500
+  #Controls the radius of the deathmatch world border.
+  deathmatch-border-radius: 50
 #Controls messages output by the plugin.
 #Placeholders provided in existing messages only work with these messages.
 messages:

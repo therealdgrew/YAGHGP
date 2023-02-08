@@ -73,7 +73,6 @@ public class InvincibilityPeriod extends Phase {
             public void run() {
                 if (timer > 0) {
                     if (timer == 120) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
-                    if (timer == 90) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     if (timer == 60) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     if (timer == 30) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));

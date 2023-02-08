@@ -109,7 +109,7 @@ public class PreGame extends Phase {
     void scatterPlayers() {
         Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();
-        List<Location> list = sm.fetchCorrectedCoordinates();
+        List<Location> list = sm.fetchSpawnLocations();
         int var;
         for (Player player : Bukkit.getOnlinePlayers()) {
             var = random.nextInt(list.size());

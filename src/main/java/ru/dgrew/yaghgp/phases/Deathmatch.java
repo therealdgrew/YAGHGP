@@ -3,12 +3,8 @@ package ru.dgrew.yaghgp.phases;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.block.*;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -40,7 +36,7 @@ public class Deathmatch extends Phase {
         pm = Main.getPlm();
         World arena = sm.getArenaobj();
         arena.getWorldBorder().setCenter(sm.fetchArenaCenter());
-        arena.getWorldBorder().setSize(sm.getBorderRadius());
+        arena.getWorldBorder().setSize(sm.getDeathmatchBorderRadius());
         arena.setTime(18000L);
         scatterPlayers();
         startTimer();
@@ -119,7 +115,7 @@ public class Deathmatch extends Phase {
     void scatterPlayers() {
         Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();
-        List<Location> list = sm.fetchCorrectedCoordinates();
+        List<Location> list = sm.fetchSpawnLocations();
         int var;
         for (Player player : pm.getRemainingPlayersList()) {
             var = random.nextInt(list.size());
