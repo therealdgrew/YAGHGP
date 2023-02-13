@@ -19,11 +19,15 @@ public class Tribute {
         return player;
     }
 
-    public void giveIntrinsicAbilities() {
-        intrinsicAbilities = AbilityManager.intrinsicAbilities();
+    public void giveStartingIntrinsicAbilities() {
+        intrinsicAbilities = AbilityManager.startingIntrinsicAbilities();
     }
 
     public List<Ability> getAbilities() {
         return intrinsicAbilities;
+    }
+
+    public void addIntrinsicAbility(Ability ability) {
+        intrinsicAbilities.add(ability);
     }
 }

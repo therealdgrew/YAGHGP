@@ -94,7 +94,7 @@ public class VoteGUIListener implements Listener {
         for (Gamemap g : gm.getGamemapOptions()) {
             ItemStack newItem = new ItemStack(g.getDisplayMaterial());
             ItemMeta newItemMeta = newItem.getItemMeta();
-            newItemMeta.setDisplayName(ChatColor.GOLD + g.getTitle());
+            newItemMeta.setDisplayName(g.getTitle());
             ArrayList<String> newItemLore = new ArrayList<>();
             newItemLore.addAll(formatLore(new ArrayList<String>(Arrays.asList(g.getDescription().split("\n")))));
             newItemMeta.setLore(newItemLore);

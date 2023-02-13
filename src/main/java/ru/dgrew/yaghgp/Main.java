@@ -4,9 +4,12 @@ import org.bukkit.*;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.dgrew.yaghgp.abilities.AbilityListener;
-import ru.dgrew.yaghgp.commands.Start;
+import ru.dgrew.yaghgp.commands.EndVoteCommand;
+import ru.dgrew.yaghgp.commands.NextPhaseCommand;
+import ru.dgrew.yaghgp.commands.StartCommand;
 import ru.dgrew.yaghgp.managers.*;
 import ru.dgrew.yaghgp.commands.VoteGUICommand;
+import ru.dgrew.yaghgp.phases.SharedPhaseLogic;
 import ru.dgrew.yaghgp.voting.VoteGUIListener;
 
 import java.io.File;
@@ -20,6 +23,7 @@ public class Main extends JavaPlugin implements Listener {
     private static SettingsManager sm;
     private static GamemapManager gm;
     private static ScoreboardManager sbm;
+    private static SharedPhaseLogic spl;
     World lobby;
     World arena;
 
@@ -36,52 +40,50 @@ public class Main extends JavaPlugin implements Listener {
         cm = new ChatManager(this.getConfig());
         sm = new SettingsManager(this.getConfig());
         sbm = new ScoreboardManager();
-        vm = new VotingManager();
         gm = new GamemapManager();
+        vm = new VotingManager();
         pm = new PhaseManager();
+        spl = new SharedPhaseLogic();
         gm.getCustomGamemaps();
+
         lobby = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.lobby", "arena")));
-        deleteArena();
-        arena = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.arena", "arena")));
+        deleteArenas();
         lobby.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         lobby.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         lobby.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         lobby.setGameRule(GameRule.DO_FIRE_TICK, false);
         lobby.setGameRule(GameRule.DO_TILE_DROPS, false);
-        arena.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         lobby.setTime(5000);
-        arena.setTime(500);
-        arena.setDifficulty(Difficulty.NORMAL);
-        arena.getWorldBorder().setSize(sm.getBorderRadius());
-        this.getCommand("start").setExecutor(new Start());
+
+        this.getCommand("start").setExecutor(new StartCommand());
         this.getCommand("vote").setExecutor(new VoteGUICommand());
-        int pluginId = 17670;
-        Metrics metrics = new Metrics(this, pluginId);
-        if (sm.getUpdateCheck()) {
-            UpdateChecker uc = new UpdateChecker(getDescription().getVersion());
-            uc.checkForUpdates();
-        }
+        this.getCommand("endvote").setExecutor(new EndVoteCommand());
+        this.getCommand("nextphase").setExecutor(new NextPhaseCommand());
+
+        // TODO
+//        int pluginId = 17670;
+//        Metrics metrics = new Metrics(this, pluginId);
+//        if (sm.getUpdateCheck()) {
+//            UpdateChecker uc = new UpdateChecker(getDescription().getVersion());
+//            uc.checkForUpdates();
+//        }
         Bukkit.getPluginManager().registerEvents(new AbilityListener(), Main.getInstance());
         Bukkit.getPluginManager().registerEvents(new VoteGUIListener(), Main.getInstance());
     }
 
-    @Override
-    public void onDisable() {
-        lobby.save();
-        arena.save();
-    }
-
-    private void deleteArena() {
+    private void deleteArenas() {
         try {
             Bukkit.getLogger().info("Deleting current arena world...");
-            World arena = new WorldCreator(this.getConfig().getString("settings.arena", "arena")).createWorld();
-            File deleteFolder = arena.getWorldFolder();
-            Bukkit.unloadWorld(arena, false);
-
+            File deleteFolder = new File("./arena");
             deleteWorld(deleteFolder);
-            Bukkit.getLogger().info("Arena deleted successfully!");
+            Bukkit.getLogger().info("arena deleted successfully!");
+
+            Bukkit.getLogger().info("Deleting current customarena world...");
+            deleteFolder = new File("./customarena");
+            deleteWorld(deleteFolder);
+            Bukkit.getLogger().info("customarena deleted successfully!");
         } catch (Exception ex) {
-            Bukkit.getLogger().severe("Could not delete arena world!");
+            Bukkit.getLogger().severe("Could not delete world! See error trace for details");
             ex.printStackTrace();
         }
     }
@@ -110,4 +112,5 @@ public class Main extends JavaPlugin implements Listener {
     public static VotingManager getVm() { return vm; }
     public static GamemapManager getGm() { return gm; }
     public static ScoreboardManager getSbm() { return sbm; }
+    public static SharedPhaseLogic getSpl() { return spl; }
 }

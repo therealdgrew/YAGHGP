@@ -37,7 +37,7 @@ public class VoteGUICommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if(sender instanceof Player){
+        if (sender instanceof Player) {
             if (pm.getCurrentPhase() instanceof Lobby) {
                 if (vm.canPlayerVoteMap((Player) sender)) {
                     Player player = (Player) sender;
@@ -49,14 +49,14 @@ public class VoteGUICommand implements CommandExecutor {
                     ItemMeta randomMapMeta = randomMap.getItemMeta();
                     randomMapMeta.setDisplayName(gm.getRandomWorld().getTitle());
                     ArrayList<String> randomMapLore = new ArrayList<>();
-                    randomMapLore.addAll(formatLore(new ArrayList<String>(Arrays.asList(gm.getRandomWorld().getDescription().split("\n")))));
+                    randomMapLore.addAll(formatLore(new ArrayList<>(Arrays.asList(gm.getRandomWorld().getDescription().split("\n")))));
                     randomMapMeta.setLore(randomMapLore);
                     randomMap.setItemMeta(randomMapMeta);
 
                     ItemMeta customMapMeta = customMap.getItemMeta();
                     customMapMeta.setDisplayName(cm.getVoteCustom());
                     ArrayList<String> customMapLore = new ArrayList<>();
-                    customMapLore.addAll(formatLore(new ArrayList<String>(Arrays.asList(cm.getVoteCustomSubtitle().split("\n")))));
+                    customMapLore.addAll(formatLore(new ArrayList<>(Arrays.asList(cm.getVoteCustomSubtitle().split("\n")))));
                     customMapMeta.setLore(customMapLore);
                     customMap.setItemMeta(customMapMeta);
 

@@ -13,9 +13,10 @@ There's not much of this scene left, but I look back fondly on this era of Minec
  * [x] Soup PvP
  * [x] Soup custom crafting recipes
  * [x] Better UI for lobby
- * [ ] Lobby voting between random map and pre-made map selections (WIP)
+ * [x] Lobby voting between random map and pre-made map selections
  * [ ] Feasts
  * [ ] Kits
+ * [ ] Allow users to join during a game in progress and be sent to lobby, with option to spectate
  * [ ] Better UI for in-game (?)
  
 #Original README:

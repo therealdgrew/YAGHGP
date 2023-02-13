@@ -1,10 +1,16 @@
 package ru.dgrew.yaghgp.abilities;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -35,24 +41,28 @@ public class AbilityListener implements Listener {
         }
     }
 
-    private void notifyOnCooldown(PlayerEvent event, Ability ability) {
-        event.getPlayer().sendTitle("", "§c" + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!", 5, 20, 5);
+    private void notifyOnCooldown(Player player, Ability ability) {
+        sendActionbar(player,  ChatColor.RED + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!");
     }
 
-    private void notifyOnCooldown(PrepareItemCraftEvent event, Ability ability) {
-        event.getViewers().get(0).sendMessage("", "§c" + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!");
+    private void notifyOnCooldown(HumanEntity entity, Ability ability) {
+        sendActionbar(Bukkit.getPlayer(entity.getName()), ChatColor.RED + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!");
     }
 
-    private void notifyOnDisabled(PlayerEvent event, Ability ability) {
-        event.getPlayer().sendTitle("", "§c" + ability.getName() + " has been disabled!!", 5, 20, 5);
+    private void notifyOnDisabled(Player player, Ability ability) {
+        sendActionbar(player,  ChatColor.RED + ability.getName() + " has been disabled!");
     }
 
-    private void notifyOnDisabled(PrepareItemCraftEvent event, Ability ability) {
-        event.getViewers().get(0).sendMessage("", "§c" + ability.getName() + " has been disabled!!");
+    private void notifyOnDisabled(HumanEntity entity, Ability ability) {
+        sendActionbar(Bukkit.getPlayer(entity.getName()), ChatColor.RED + ability.getName() + " has been disabled!");
+    }
+
+    private void sendActionbar(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
     }
 
     @EventHandler
-    public void onRightClick(PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) {
         pm.findTribute(event.getPlayer()).ifPresent(
                 (t) -> {
                     try {
@@ -62,9 +72,9 @@ public class AbilityListener implements Listener {
                         if (!selectedAbility.isDisabled() && !selectedAbility.isOnCooldown()) {
                             selectedAbility.getCallable().execute(event);
                         } else if (selectedAbility.isDisabled()) {
-                            notifyOnDisabled(event, selectedAbility);
+                            notifyOnDisabled(event.getPlayer(), selectedAbility);
                         } else if (selectedAbility.isOnCooldown()) {
-                            notifyOnCooldown(event, selectedAbility);
+                            notifyOnCooldown(event.getPlayer(), selectedAbility);
                         }
                     } catch (NoSuchElementException ignored) {
                     }
@@ -85,10 +95,10 @@ public class AbilityListener implements Listener {
                             selectedAbility.getCallable().execute(event);
                         } else if (selectedAbility.isDisabled()) {
                             event.getInventory().setResult(new ItemStack(Material.AIR));
-                            notifyOnDisabled(event, selectedAbility);
+                            notifyOnDisabled(event.getViewers().get(0), selectedAbility);
                         } else if (selectedAbility.isOnCooldown()) {
                             event.getInventory().setResult(new ItemStack(Material.AIR));
-                            notifyOnCooldown(event, selectedAbility);
+                            notifyOnCooldown(event.getViewers().get(0), selectedAbility);
                         }
                     } catch (NoSuchElementException ignored) {
                         event.getInventory().setResult(new ItemStack(Material.AIR));

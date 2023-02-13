@@ -17,32 +17,31 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import ru.dgrew.yaghgp.Main;
-import ru.dgrew.yaghgp.managers.ChatManager;
-import ru.dgrew.yaghgp.managers.PlayerManager;
-import ru.dgrew.yaghgp.managers.ScoreboardManager;
-import ru.dgrew.yaghgp.managers.SettingsManager;
+import ru.dgrew.yaghgp.managers.*;
+
 import java.util.List;
 import java.util.Random;
 
 public class PreGame extends Phase {
     private int timer;
     private ChatManager cm;
-    private SettingsManager sm;
     private PlayerManager pm;
+    private GamemapManager gm;
+    private SharedPhaseLogic spl;
     private BukkitTask countdown;
     //region Phase Methods
     @Override
     public void onEnable() {
-        sm = Main.getSm();
         cm = Main.getCm();
         pm = Main.getPlm();
+        gm = Main.getGm();
+        spl = Main.getSpl();
         timer = 10;
-        startCountdown();
-        scatterPlayers();
-        sm.getArenaobj().setAutoSave(false);
         pm.updateTributesList();
         pm.giveIntrinsicAbilitiesToAllTributes();
         pm.clearAllPlayerScoreboards();
+        scatterPlayers();
+        startCountdown();
         Bukkit.getLogger().info("PreGame phase has started successfully!");
     }
     @Override
@@ -57,13 +56,11 @@ public class PreGame extends Phase {
     //region Phase Listeners
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        e.setJoinMessage(null);
-        e.getPlayer().kickPlayer("Game already started!");
+        spl.inGameOnJoin(e);
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has left!");
-        pm.removeOnDC(e.getPlayer());
+        spl.inGameOnLeave(e);
     }
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
@@ -107,6 +104,7 @@ public class PreGame extends Phase {
                     for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
                     Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimerend());
                     Main.getPm().nextPhase();
+                    cancel();
                 }
             }
         }.runTaskTimer(Main.getInstance(),20L, 20L);
@@ -115,7 +113,7 @@ public class PreGame extends Phase {
     void scatterPlayers() {
         Bukkit.getLogger().info("Scattering players...");
         Random random = new Random();
-        List<Location> list = sm.fetchSpawnLocations();
+        List<Location> list = gm.getSpawnLocations(pm.getRemainingTributesList().size());
         int var;
         for (Player player : Bukkit.getOnlinePlayers()) {
             var = random.nextInt(list.size());

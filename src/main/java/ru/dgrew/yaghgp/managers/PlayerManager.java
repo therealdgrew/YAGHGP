@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import ru.dgrew.yaghgp.tribute.Tribute;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class PlayerManager {
     }
 
     public void transferToSpectators(Player player) {
-        tributes.removeIf(tribute -> tribute.getPlayerObject().equals(player));
+        tributes.removeIf(tribute -> tribute.getPlayerObject().getName().equals(player.getName()));
         spectators.add(player);
         player.setGameMode(GameMode.SPECTATOR);
     }
@@ -40,7 +39,7 @@ public class PlayerManager {
 
     public Optional<Tribute> findTribute(Player player) {
         return tributes.stream().parallel()
-                .filter(tribute -> tribute.getPlayerObject().equals(player))
+                .filter(tribute -> tribute.getPlayerObject().getName().equals(player.getName()))
                 .findFirst();
     }
 
@@ -64,18 +63,18 @@ public class PlayerManager {
     }
 
     public void removeTribute(Player player) {
-        tributes.removeIf(tribute -> tribute.getPlayerObject().equals(player));
+        tributes.removeIf(tribute -> tribute.getPlayerObject().getName().equals(player.getName()));
     }
 
     public void removeOnDC(Player p) {
-        tributes.removeIf(tribute -> tribute.getPlayerObject().equals(p));
+        tributes.removeIf(tribute -> tribute.getPlayerObject().getName().equals(p.getName()));
     }
 
     public void giveIntrinsicAbilitiesToAllTributes() {
         tributes.stream()
                 .forEach(tribute -> {
                     Bukkit.getLogger().info("Giving " + tribute.getPlayerObject().getDisplayName() + " intrinsic abilities...");
-                    tribute.giveIntrinsicAbilities();
+                    tribute.giveStartingIntrinsicAbilities();
                 });
     }
 
