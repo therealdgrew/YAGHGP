@@ -42,7 +42,7 @@ public class CompassTrack extends Ability<PlayerInteractEvent> {
             if (nearestPlayer == null) {
                 sendActionbar(player, NO_NEAREST_PLAYER_TEXT);
             } else {
-                sendActionbar(player, formatDistanceText(nearestPlayer.getKey().getName(), nearestPlayer.getValue()));
+                sendActionbar(player, formatDistanceText(nearestPlayer.getKey().getName(), Math.sqrt(nearestPlayer.getValue())));
                 player.setCompassTarget(nearestPlayer.getKey().getLocation());
             }
             player.updateInventory();

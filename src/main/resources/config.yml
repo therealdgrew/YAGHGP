@@ -21,6 +21,7 @@ messages:
   lobby-map-loaded: "&fLoading complete! Preparing to start the game..."
   launch-cancelled: "&fNot enough players for the game to start! Timer aborted."
   start-timer-notifications: "&fThe game will commence in {timer} {m}!"
+  movement-timer-notifications: "&fPlayers can move in {timer} {m}!"
   invincibility-timer-notifications: "&fInvincibility will wear off in {timer} {m}!"
   global-game-started: "&fGame is now commencing!"
   grace-period: "&fGrace period will end in {timer} {m}!"

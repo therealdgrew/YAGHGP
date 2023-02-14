@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class InGameStart extends Phase {
+public class FightPeriodStart extends Phase {
     private int timer;
     private ChatManager cm;
     private LootManager lm;
@@ -41,7 +41,7 @@ public class InGameStart extends Phase {
         gm = Main.getGm();
         spl = Main.getSpl();
         startTimer();
-        Bukkit.getLogger().info("InGameStart phase has started successfully!");
+        Bukkit.getLogger().info("FightPeriodStart phase has started successfully!");
     }
 
     @Override

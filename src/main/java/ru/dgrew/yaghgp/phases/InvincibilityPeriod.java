@@ -1,8 +1,6 @@
 package ru.dgrew.yaghgp.phases;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,7 +48,7 @@ public class InvincibilityPeriod extends Phase {
     }
     @Override
     public Phase next() {
-        return new InGameStart();
+        return new FightPeriodStart();
     }
     //endregion
     //region Phase Listeners

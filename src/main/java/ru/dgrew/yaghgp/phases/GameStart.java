@@ -1,6 +1,8 @@
 package ru.dgrew.yaghgp.phases;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -11,17 +13,17 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import ru.dgrew.yaghgp.Main;
-import ru.dgrew.yaghgp.managers.*;
-import ru.dgrew.yaghgp.tribute.Tribute;
+import ru.dgrew.yaghgp.managers.ChatManager;
+import ru.dgrew.yaghgp.managers.GamemapManager;
+import ru.dgrew.yaghgp.managers.PlayerManager;
 
 import java.util.List;
 import java.util.Random;
 
-public class PreGame extends Phase {
+public class GameStart extends Phase {
     private int timer;
     private ChatManager cm;
     private PlayerManager pm;
@@ -35,15 +37,12 @@ public class PreGame extends Phase {
         pm = Main.getPlm();
         gm = Main.getGm();
         spl = Main.getSpl();
-        timer = 30;
+        timer = 10;
         pm.updateTributesList();
         pm.giveIntrinsicAbilitiesToAllTributes();
         pm.clearAllPlayerScoreboards();
         scatterPlayers();
         startCountdown();
-        for (Tribute tribute : pm.getRemainingTributesList()) {
-            tribute.getPlayerObject().setGameMode(GameMode.SPECTATOR);
-        }
         Bukkit.getLogger().info("PreGame phase has started successfully!");
     }
     @Override
@@ -52,26 +51,13 @@ public class PreGame extends Phase {
     }
     @Override
     public Phase next() {
-        return new GameStart();
+        return new InvincibilityPeriod();
     }
     //endregion
     //region Phase Listeners
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        // Allow player to join during pregame
-        Player p = e.getPlayer();
-        e.setJoinMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has joined!");
-        p.teleport(gm.getSpawnLocations(1).get(0));
-        p.setGameMode(GameMode.SPECTATOR);
-        p.setExp(0);
-        p.setLevel(0);
-        p.setHealth(20.0);
-        p.setFoodLevel(20);
-        p.setSaturation(1.0f);
-        p.setTotalExperience(0);
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(new ItemStack[]{null, null, null, null});
-        p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
+        spl.inGameOnJoin(e);
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
@@ -108,15 +94,16 @@ public class PreGame extends Phase {
             @Override
             public void run() {
                 if (timer > 0) {
-                    if (timer == 30 || timer == 15 || timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getStartTimer(timer));
+                    if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getMovementTimeNotification(timer));
                     if (timer <= 5) {
                         for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                        Bukkit.broadcastMessage(cm.getPrefix() + cm.getStartTimer(timer));
+                        Bukkit.broadcastMessage(cm.getPrefix() + cm.getMovementTimeNotification(timer));
                     }
 
                     timer--;
                 } else {
-                    for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_0, 1, 1);
+                    for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 1);
+                    Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimerend());
                     Main.getPm().nextPhase();
                     cancel();
                 }

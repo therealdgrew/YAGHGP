@@ -220,6 +220,7 @@ public class GamemapManager {
                 for (int i = 0; i < playerCount; i++) {
                     if (listPos > coords.size()-1) listPos = 0;
                     locations.add(generateLocation(coords.get(listPos), arenaWorld));
+                    listPos++;
                 }
             } catch (Exception e) {
                 Bukkit.getLogger().severe("Could not generate custom spawn locations for players!");

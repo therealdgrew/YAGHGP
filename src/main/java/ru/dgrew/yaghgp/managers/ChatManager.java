@@ -246,6 +246,12 @@ public class ChatManager {
         return compassTime;
     }
 
+    private String movementTimeNotification;
+
+    public String getMovementTimeNotification(int timer) {
+        return formatTime(this.movementTimeNotification, timer);
+    }
+
     private void setUpEntries() {
         prefix = format(config.getString("messages.prefix"));
         perm = format(config.getString("messages.no-permission"));
@@ -282,5 +288,6 @@ public class ChatManager {
         lobbyMapLoaded = format(config.getString("messages.lobby-map-loaded"));
         compassTimerNotification = format(config.getString("messages.compass-timer-notifications"));
         compassTime = format(config.getString("messages.compass-time"));
+        movementTimeNotification = format(config.getString("messages.movement-timer-notifications"));
     }
 }
