@@ -115,4 +115,20 @@ public class Gamemap {
             Bukkit.getLogger().severe("Could not load map! " + fieldName + " is null for map " + filename);
         }
     }
+
+    public RandomGamemap toRandomGamemap() {
+        return new RandomGamemap(
+                this.filename,
+                this.title,
+                this.description,
+                this.displayMaterial,
+                this.worldCentre,
+                this.borderRadius,
+                this.deathmatchBorderRadius,
+                this.allowWorldBreaking,
+                this.randomizeSpawnLocations,
+                this.randomizeSpread,
+                this.spawnLocations
+        );
+    }
 }

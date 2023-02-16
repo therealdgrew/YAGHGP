@@ -1,6 +1,7 @@
 package ru.dgrew.yaghgp.phases;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -13,12 +14,14 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import ru.dgrew.yaghgp.Main;
 import ru.dgrew.yaghgp.managers.ChatManager;
 import ru.dgrew.yaghgp.managers.GamemapManager;
 import ru.dgrew.yaghgp.managers.PlayerManager;
+import ru.dgrew.yaghgp.tribute.Tribute;
 
 import java.util.List;
 import java.util.Random;
@@ -43,6 +46,12 @@ public class GameStart extends Phase {
         pm.clearAllPlayerScoreboards();
         scatterPlayers();
         startCountdown();
+        for (Tribute tribute : pm.getRemainingTributesList()) {
+            tribute.getPlayerObject().setGameMode(GameMode.ADVENTURE);
+            for (ItemStack startingItem : tribute.getStartingItems()) {
+                tribute.getPlayerObject().getInventory().addItem(startingItem);
+            }
+        }
         Bukkit.getLogger().info("PreGame phase has started successfully!");
     }
     @Override
@@ -62,12 +71,6 @@ public class GameStart extends Phase {
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
         spl.inGameOnLeave(e);
-    }
-    @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
-    @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent e) {
-        e.setCancelled(true);
     }
     @EventHandler
     public void onLeafDecay(LeavesDecayEvent e){

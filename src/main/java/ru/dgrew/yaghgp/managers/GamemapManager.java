@@ -4,11 +4,14 @@ import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import ru.dgrew.yaghgp.Main;
 import ru.dgrew.yaghgp.gamemap.Coordinates;
 import ru.dgrew.yaghgp.gamemap.Gamemap;
+import ru.dgrew.yaghgp.gamemap.RandomGamemap;
+import ru.dgrew.yaghgp.shared.BiomeChecker;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,8 +25,8 @@ import java.util.stream.Stream;
 public class GamemapManager {
     private ChatManager cm;
     private SettingsManager sm;
-    private static final List<Gamemap> GAMEMAP_OPTIONS = new ArrayList<>();
-    private static Gamemap randomWorld;
+    private static final List<Gamemap> CUSTOM_GAMEMAP_OPTIONS = new ArrayList<>();
+    private static RandomGamemap randomWorld;
     private static boolean mapLoaded = false;
     private static String gamemapFolder = "";
     private World arenaWorld;
@@ -81,9 +84,10 @@ public class GamemapManager {
                 if (option.getFilename().equals("random")) {
                     Bukkit.getLogger().info("Loaded random world option");
                     option.setTitle(option.getTitle().replace("§6","§a"));
-                    randomWorld = option;
+                    RandomGamemap randomOption = option.toRandomGamemap();
+                    randomWorld = randomOption;
                 } else {
-                    GAMEMAP_OPTIONS.add(option);
+                    CUSTOM_GAMEMAP_OPTIONS.add(option);
                 }
             } catch (IOException | InvalidConfigurationException e) {
                 e.printStackTrace();
@@ -95,14 +99,15 @@ public class GamemapManager {
         return randomWorld;
     }
 
-    public List<Gamemap> getGamemapOptions() {
-        return GAMEMAP_OPTIONS;
+    public List<Gamemap> getCustomGamemapOptions() {
+        return CUSTOM_GAMEMAP_OPTIONS;
     }
 
     public void loadGamemap(Gamemap map) {
-        if (map.getTitle().equals(getRandomWorld().getTitle())) {
-            gamemapFolder = "arena";
+        if (map instanceof RandomGamemap randMap) {
+            gamemapFolder = "random";
             Bukkit.createWorld(WorldCreator.name(gamemapFolder));
+            retryRandomWorldUntilNoOceanAtSpawn();
         } else {
             gamemapFolder = "customarena";
             Bukkit.getLogger().info("Copying map: " + Main.getInstance().getDataFolder() + "/arenas/" + map.getFilename());
@@ -114,7 +119,6 @@ public class GamemapManager {
                 Bukkit.getLogger().severe("Something went wrong copying arena to server directory!");
                 e.printStackTrace();
             }
-
             Bukkit.createWorld(WorldCreator.name(gamemapFolder));
         }
 
@@ -124,6 +128,23 @@ public class GamemapManager {
         setGameOptions(arenaWorld, arenaGamemap);
 
         mapLoaded = true;
+    }
+
+    // May replace with a relocation of the spawn point, but for now I want to keep the spawn at 0,0,0 always
+    // (or whatever is set in the configs)
+    private void retryRandomWorldUntilNoOceanAtSpawn() {
+        World w = Bukkit.getWorld(gamemapFolder);
+        Location potentialWater = generateLocation(deserializeCoordinate(getRandomWorld().getWorldCentre()), w);
+        potentialWater.setY(62);
+        if (potentialWater.getBlock().getBlockData().getMaterial() == Material.WATER) {
+            Bukkit.getLogger().warning("Random world generated water at spawn! Regenerating...");
+            Bukkit.unloadWorld(gamemapFolder, false);
+            File deleteFolder = new File("./" + gamemapFolder);
+            Main.deleteWorld(deleteFolder);
+            Bukkit.createWorld(WorldCreator.name(gamemapFolder));
+            retryRandomWorldUntilNoOceanAtSpawn();
+        }
+        Bukkit.getLogger().info("World did not have water at spawn!");
     }
 
     private void setGameOptions(World arena, Gamemap map) {

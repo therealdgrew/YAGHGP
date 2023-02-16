@@ -9,6 +9,8 @@ settings:
   lobby-spawn: "100.0:64.0:100.0:0.0f:0.0f" #Example coordinates
   #Controls the range (in blocks from the player) that the tracking compass should track.
   compass-track-range: 200
+  #Requires WorldGeneratorApi to be installed in ./plugins. This sets the random world to be generated using the custom defined world generator
+  use-custom-world-generator: true
 #Controls messages output by the plugin.
 #Placeholders provided in existing messages only work with these messages.
 messages:
@@ -49,6 +51,9 @@ messages:
   vote-message: "&fYou have voted for {map}"
   compass-timer-notifications: "&fCompasses will be handed out in {timer} {m}!"
   compass-time: "&fCompasses have been handed out! If you didn't have inventory space, it will be dropped at your feet. Use this to track other players!"
+  kits-too-late: "&fIt's too late to choose a kit!"
+  kits-menu-title: "&8Select a kit"
+  kits-selection: "&fYou have selected {kit}!"
   summary:
     - "Game summary is coming soon!"
     - "It will be broadcasted once the game is over"

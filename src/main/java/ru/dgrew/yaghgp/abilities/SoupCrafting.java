@@ -34,7 +34,7 @@ public class SoupCrafting extends Ability<PrepareItemCraftEvent>  {
     private static ShapelessRecipe cocoaSoupRecipe;
 
     public SoupCrafting() {
-        super("Soup crafting", 0, false);
+        super("Soup crafting", PrepareItemCraftEvent.class, 0, false);
         getSeedSoupRecipe();
         getCactiSoupRecipe();
         getCocoaSoupRecipe();

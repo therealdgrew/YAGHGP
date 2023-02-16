@@ -10,11 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -35,14 +33,15 @@ public class AbilityListener implements Listener {
 
     private boolean tryPreconditionSafely(Ability ability, Event event) {
         try {
-            return ability.precondition(event);
-        } catch (ClassCastException e) {
+            if (ability.getType() == event.getClass()) return ability.precondition(event);
+        } catch (Exception e) {
             return false;
         }
+        return false;
     }
 
     private void notifyOnCooldown(Player player, Ability ability) {
-        sendActionbar(player,  ChatColor.RED + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!");
+        sendActionbar(player, ChatColor.RED + ability.getName() + " is on cooldown for " + ability.getCurrentCooldown() + " more seconds!");
     }
 
     private void notifyOnCooldown(HumanEntity entity, Ability ability) {
@@ -50,7 +49,7 @@ public class AbilityListener implements Listener {
     }
 
     private void notifyOnDisabled(Player player, Ability ability) {
-        sendActionbar(player,  ChatColor.RED + ability.getName() + " has been disabled!");
+        sendActionbar(player, ChatColor.RED + ability.getName() + " has been disabled!");
     }
 
     private void notifyOnDisabled(HumanEntity entity, Ability ability) {
@@ -119,5 +118,48 @@ public class AbilityListener implements Listener {
         } else {
             return true;
         }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        pm.findTribute(event.getPlayer()).ifPresent(
+                (t) -> {
+                    try {
+                        Ability selectedAbility = t.getAbilities().stream().parallel()
+                                .filter(ability -> tryPreconditionSafely(ability, event))
+                                .findFirst().get();
+                        if (!selectedAbility.isDisabled() && !selectedAbility.isOnCooldown()) {
+                            selectedAbility.getCallable().execute(event);
+                        } else if (selectedAbility.isDisabled()) {
+                            notifyOnDisabled(event.getPlayer(), selectedAbility);
+                        } else if (selectedAbility.isOnCooldown()) {
+                            notifyOnCooldown(event.getPlayer(), selectedAbility);
+                        }
+                    } catch (NoSuchElementException ignored) {
+                    }
+                }
+        );
+    }
+
+    @EventHandler
+    public void onPlayerTakesDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player)) return;
+        pm.findTribute((Player) event.getEntity()).ifPresent(
+                (t) -> {
+                    try {
+                        Ability selectedAbility = t.getAbilities().stream().parallel()
+                                .filter(ability -> tryPreconditionSafely(ability, event))
+                                .findFirst().get();
+                        if (!selectedAbility.isDisabled() && !selectedAbility.isOnCooldown()) {
+                            selectedAbility.getCallable().execute(event);
+                        } else if (selectedAbility.isDisabled()) {
+                            notifyOnDisabled(((Player) event.getEntity()), selectedAbility);
+                        } else if (selectedAbility.isOnCooldown()) {
+                            notifyOnCooldown(((Player) event.getEntity()), selectedAbility);
+                        }
+                    } catch (NoSuchElementException ignored) {
+                    }
+                }
+        );
     }
 }

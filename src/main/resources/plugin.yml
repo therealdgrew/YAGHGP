@@ -13,3 +13,5 @@ commands:
     description: "/endvote - End voting time and start game shortly after."
   nextphase:
     description: "/nextphase - For admin / debug use only. Force the next phase of the match."
+  kits:
+    description: "/kits - Opens the kit selection UI"

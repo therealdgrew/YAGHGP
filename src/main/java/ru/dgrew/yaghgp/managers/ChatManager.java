@@ -252,6 +252,24 @@ public class ChatManager {
         return formatTime(this.movementTimeNotification, timer);
     }
 
+    private String kitsTooLate;
+
+    public String getKitsTooLate() {
+        return kitsTooLate;
+    }
+
+    private String kitsMenuTitle;
+
+    public String getKitsMenuTitle() {
+        return kitsMenuTitle;
+    }
+
+    private String kitsSelection;
+
+    public String getKitsSelection(String kitName) {
+        return formatEmbeddedString(kitsSelection, "kit", kitName);
+    }
+
     private void setUpEntries() {
         prefix = format(config.getString("messages.prefix"));
         perm = format(config.getString("messages.no-permission"));
@@ -289,5 +307,8 @@ public class ChatManager {
         compassTimerNotification = format(config.getString("messages.compass-timer-notifications"));
         compassTime = format(config.getString("messages.compass-time"));
         movementTimeNotification = format(config.getString("messages.movement-timer-notifications"));
+        kitsTooLate = format(config.getString("messages.kits-too-late"));
+        kitsMenuTitle = format(config.getString("messages.kits-menu-title"));
+        kitsSelection = format(config.getString("messages.kits-selection"));
     }
 }

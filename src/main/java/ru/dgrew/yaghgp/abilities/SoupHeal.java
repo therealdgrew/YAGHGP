@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class SoupHeal extends Ability<PlayerInteractEvent> {
 
     public SoupHeal() {
-        super("Soup heal", 0, false);
+        super("Soup heal", PlayerInteractEvent.class, 0, false);
     }
 
     @Override

@@ -2,15 +2,18 @@ package ru.dgrew.yaghgp;
 
 import org.bukkit.*;
 import org.bukkit.event.Listener;
+import org.bukkit.generator.BiomeProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.dgrew.yaghgp.abilities.AbilityListener;
-import ru.dgrew.yaghgp.commands.EndVoteCommand;
-import ru.dgrew.yaghgp.commands.NextPhaseCommand;
-import ru.dgrew.yaghgp.commands.StartCommand;
+import ru.dgrew.yaghgp.biome.DefaultBiomeProvider;
+import ru.dgrew.yaghgp.biome.OceanlessBiomeGenerator;
+import ru.dgrew.yaghgp.commands.*;
+import ru.dgrew.yaghgp.gui.KitsGUIListener;
 import ru.dgrew.yaghgp.managers.*;
-import ru.dgrew.yaghgp.commands.VoteGUICommand;
 import ru.dgrew.yaghgp.phases.SharedPhaseLogic;
-import ru.dgrew.yaghgp.voting.VoteGUIListener;
+import ru.dgrew.yaghgp.gui.VoteGUIListener;
 
 import java.io.File;
 
@@ -24,6 +27,7 @@ public class Main extends JavaPlugin implements Listener {
     private static GamemapManager gm;
     private static ScoreboardManager sbm;
     private static SharedPhaseLogic spl;
+    private static KitManager km;
     World lobby;
     World arena;
 
@@ -42,8 +46,9 @@ public class Main extends JavaPlugin implements Listener {
         sbm = new ScoreboardManager();
         gm = new GamemapManager();
         vm = new VotingManager();
-        pm = new PhaseManager();
         spl = new SharedPhaseLogic();
+        pm = new PhaseManager();
+        km = new KitManager();
         gm.getCustomGamemaps();
 
         lobby = Bukkit.createWorld(WorldCreator.name(this.getConfig().getString("settings.lobby", "arena")));
@@ -59,6 +64,7 @@ public class Main extends JavaPlugin implements Listener {
         this.getCommand("vote").setExecutor(new VoteGUICommand());
         this.getCommand("endvote").setExecutor(new EndVoteCommand());
         this.getCommand("nextphase").setExecutor(new NextPhaseCommand());
+        this.getCommand("kits").setExecutor(new KitGUICommand());
 
         // TODO
 //        int pluginId = 17670;
@@ -69,16 +75,26 @@ public class Main extends JavaPlugin implements Listener {
 //        }
         Bukkit.getPluginManager().registerEvents(new AbilityListener(), Main.getInstance());
         Bukkit.getPluginManager().registerEvents(new VoteGUIListener(), Main.getInstance());
+        Bukkit.getPluginManager().registerEvents(new KitsGUIListener(), Main.getInstance());
+    }
+
+    @Nullable
+    @Override
+    public BiomeProvider getDefaultBiomeProvider(@NotNull String worldName, @Nullable String id) {
+        Bukkit.getLogger().info("Getting custom arena biome provider...");
+        return new OceanlessBiomeGenerator(DefaultBiomeProvider.getBiomeProvider(Bukkit.getWorld("world")));
     }
 
     private void deleteArenas() {
         try {
-            Bukkit.getLogger().info("Deleting current arena world...");
-            File deleteFolder = new File("./arena");
+            Bukkit.getLogger().info("Deleting current random arena world...");
+            Bukkit.unloadWorld("random", false);
+            File deleteFolder = new File("./random");
             deleteWorld(deleteFolder);
-            Bukkit.getLogger().info("arena deleted successfully!");
+            Bukkit.getLogger().info("random deleted successfully!");
 
             Bukkit.getLogger().info("Deleting current customarena world...");
+            Bukkit.unloadWorld("customarena", false);
             deleteFolder = new File("./customarena");
             deleteWorld(deleteFolder);
             Bukkit.getLogger().info("customarena deleted successfully!");
@@ -88,7 +104,7 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
 
-    private boolean deleteWorld(File path) {
+    public static boolean deleteWorld(File path) {
         if(path.exists()) {
             File files[] = path.listFiles();
             for(int i=0; i<files.length; i++) {
@@ -113,4 +129,5 @@ public class Main extends JavaPlugin implements Listener {
     public static GamemapManager getGm() { return gm; }
     public static ScoreboardManager getSbm() { return sbm; }
     public static SharedPhaseLogic getSpl() { return spl; }
+    public static KitManager getKm() { return km; }
 }

@@ -56,11 +56,18 @@ public class SettingsManager {
         return compassTrackRange;
     }
 
+    private boolean useCustomWorldGen;
+
+    public boolean getUseCustomWorldGen() {
+        return useCustomWorldGen;
+    }
+
 
     void setUpEntries() {
         lobby = config.getString("settings.lobby");
         lobbySpawn = config.getString("settings.lobby-spawn");
         compassTrackRange = config.getInt("settings.compass-track-range");
         updateCheck = config.getBoolean("settings.check-for-updates");
+        useCustomWorldGen = config.getBoolean("settings.use-custom-world-generator");
     }
 }

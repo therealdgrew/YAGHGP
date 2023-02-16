@@ -26,6 +26,7 @@ public class InvincibilityPeriod extends Phase {
     private GamemapManager gm;
     private SharedPhaseLogic spl;
     private BukkitTask countdown;
+
     //region Phase Methods
     @Override
     public void onEnable() {
@@ -42,36 +43,46 @@ public class InvincibilityPeriod extends Phase {
         gm.getArenaWorld().setAutoSave(false);
         Bukkit.getLogger().info("InvincibilityPeriod phase has started successfully!");
     }
+
     @Override
     public void onDisable() {
         countdown.cancel();
     }
+
     @Override
     public Phase next() {
         return new FightPeriodStart();
     }
+
     //endregion
     //region Phase Listeners
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         spl.inGameOnJoin(e);
     }
+
     @EventHandler
-    public void onLeave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e) {
         spl.inGameOnLeave(e);
     }
+
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e) { e.setCancelled(true); }
+    public void onCommand(PlayerCommandPreprocessEvent e) {
+        e.setCancelled(true);
+    }
+
     @EventHandler
     public void onWorldDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player){
+        if (e.getEntity() instanceof Player) {
             e.setCancelled(true);
         }
     }
+
     @EventHandler
-    public void onLeafDecay(LeavesDecayEvent e){
+    public void onLeafDecay(LeavesDecayEvent e) {
         e.setCancelled(true);
     }
+
     //endregion
     //region Runnables
     void startCountdown() {
@@ -84,18 +95,20 @@ public class InvincibilityPeriod extends Phase {
                     if (timer == 30) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     if (timer == 10) Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     if (timer <= 5) {
-                        for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                        for (Player p : Bukkit.getOnlinePlayers())
+                            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                         Bukkit.broadcastMessage(cm.getPrefix() + cm.getInvincibilityTimer(timer));
                     }
 
                     timer--;
                 } else {
-                    for(Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
+                    for (Player p : Bukkit.getOnlinePlayers())
+                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                     Bukkit.broadcastMessage(cm.getPrefix() + cm.getTimerend());
                     Main.getPm().nextPhase();
                     cancel();
                 }
             }
-        }.runTaskTimer(Main.getInstance(),20L, 20L);
+        }.runTaskTimer(Main.getInstance(), 20L, 20L);
     }
 }

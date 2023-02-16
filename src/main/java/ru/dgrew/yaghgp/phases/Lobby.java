@@ -24,6 +24,8 @@ public class Lobby extends Phase {
     private ScoreboardManager sbm;
     private VotingManager vm;
     private GamemapManager gm;
+    private PlayerManager plm;
+    private SharedPhaseLogic spl;
     private BukkitTask countdown;
     private int voteTimer;
     private boolean mapLoadInProgress = false;
@@ -35,6 +37,8 @@ public class Lobby extends Phase {
         sbm = Main.getSbm();
         vm = Main.getVm();
         gm = Main.getGm();
+        plm = Main.getPlm();
+        spl = Main.getSpl();
         voteTimer = 15;
         Bukkit.getLogger().info("Lobby phase has started successfully!");
     }
@@ -62,8 +66,9 @@ public class Lobby extends Phase {
         p.getInventory().clear();
         p.getInventory().setArmorContents(new ItemStack[]{null, null, null, null});
         p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
-        p.sendTitle(ChatColor.GOLD + "Welcome to the Hunger Games", ChatColor.GRAY + "Please use the command " + ChatColor.AQUA + "/vote" + ChatColor.GRAY + " to vote on what map should be played", 20, 200, 40);
+        p.sendTitle(ChatColor.GOLD + "Welcome to the Hunger Games", ChatColor.GRAY + "Use " + ChatColor.AQUA + "/vote" + ChatColor.GRAY + " to vote for a map and " + ChatColor.AQUA + "/kits" + ChatColor.GRAY + " to choose a kit!", 20, 200, 40);
         p.setScoreboard(sbm.getMapVoteBoard());
+        plm.addTribute(p);
         Bukkit.broadcastMessage(cm.getPrefix() + cm.getLobbyPlayerCounter(Bukkit.getOnlinePlayers().size()));
     }
 
@@ -98,7 +103,7 @@ public class Lobby extends Phase {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.YELLOW + e.getPlayer().getName() + " has left!");
+        spl.inGameOnLeave(e);
     }
     @EventHandler
     public void onWorldDamage(EntityDamageEvent e) {

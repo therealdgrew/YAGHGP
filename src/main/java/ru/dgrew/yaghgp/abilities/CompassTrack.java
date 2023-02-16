@@ -24,7 +24,7 @@ public class CompassTrack extends Ability<PlayerInteractEvent> {
     private static ItemStack trackingCompassItem;
 
     public CompassTrack() {
-        super("Compass tracking", 1, false);
+        super("Compass tracking", PlayerInteractEvent.class, 1, false);
         if (pm == null) pm = Main.getPlm();
     }
 

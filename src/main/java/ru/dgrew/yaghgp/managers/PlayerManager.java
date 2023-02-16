@@ -51,11 +51,17 @@ public class PlayerManager {
 
     public void updateTributesList() {
         spectators.clear();
-        tributes.clear();
         for (Player p : Bukkit.getOnlinePlayers()) {
-            tributes.add(new Tribute(p));
+            if (findTribute(p).isEmpty()) {
+                tributes.add(new Tribute(p));
+            }
         }
-        Bukkit.getLogger().info("Tributes list after update: " + tributes.toString());
+        for (Tribute t : tributes) {
+            if (!t.getPlayerObject().isOnline()) {
+                tributes.remove(t);
+            }
+        }
+        Bukkit.getLogger().info("Tributes list after refresh: " + tributes.toString());
     }
 
     public void addTribute(Player player) {
